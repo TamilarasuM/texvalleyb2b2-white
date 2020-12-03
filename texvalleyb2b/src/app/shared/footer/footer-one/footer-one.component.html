@@ -1,0 +1,165 @@
+<!--footer section -->
+<footer [class]="class">
+	<div class="light-layout" *ngIf="newsletter">
+	</div>
+	<section class="section-b-space light-layout">
+		<div class="container">
+			<div class="row footer-theme partition-f">
+		
+				<div class="col">
+					<div class="sub-title">
+						<div class="footer-title">
+                            <h4>Categories</h4>
+                        </div>
+                        <div class="footer-contant">
+                            <ul>
+								<li *ngFor="let item of items;"><a [routerLink]="['/shop/segments',item.segment_ID]">{{item.title}}</a></li>
+                            </ul>
+                        </div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="sub-title">
+						<div class="footer-title">
+                            <h4>who we are?</h4>
+                        </div>
+                        <div class="footer-contant">
+                            <ul>
+                                <li><a [routerLink]="['/aboutus']" >About US</a></li>
+                                <li><a [routerLink]="['/buyer']">Buyer</a></li>
+                                <li><a [routerLink]="['/seller']">Seller</a></li>
+                                <li><a [routerLink]="['/whyb2b']">Why Texvalley B2B?</a></li>
+                            </ul>
+                        </div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="sub-title">
+					<div class="footer-title">
+						<h4>B2B APP On Mobile</h4>
+					</div>
+				</div>
+					<div class="footer-contant">
+						<div class="footer-logo">
+						<div><a target="_blank" href="https://play.google.com/store/apps/details?id=com.texvalleyb2b"><img width="130px" src="assets/images/googleplay1.svg" alt="logo"></a>	</div>
+						<br>
+						<div>
+							<a target="_blank" href="https://apps.apple.com/us/app/texvalley-b2b-sourcing/id1472216692"><img height="40px" src="assets/images/appStore1.svg" alt="logo"></a>	
+							
+						</div>
+						
+						
+						</div>
+						<!-- <p>
+							Texvalley, with some of the finest collections of textiles, apparel, made ups and home furnishing items, produced by leading names from South, offers a huge opportunity for wholesalers and large retailers to source the best of products in mindboggling varieties at extremely competitive rates from one single place and that happens to be its iconic daily market shopping area, which has set a new benchmark in size, aesthetics, features, design and facilities in the B2B space	
+						</p> -->
+						<div class="footer-social">
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com/TexvalleyB2B1/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-google-plus" aria-hidden="true"></i></a>                 
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+					</div>
+				</div>
+				<!-- <div class="col">
+					<div class="sub-title">
+						<div class="footer-title">
+                            <h4>Texvalley B2B APP On Mobile</h4>
+                        </div>
+                        <div class="footer-contant">
+                            <ul>						
+                                <li><a >FAQ</a></li>
+                                <li><a >Terms Of Use</a></li>
+                                <li><a >Returns</a></li>
+                                <li><a >Shipping</a></li>
+                                <li><a >Privacy Policy</a></li>
+                                <li><a >Jobs</a></li>
+                            </ul>
+                        </div>
+					</div>
+				</div> -->
+				<div class="col">
+					<div class="sub-title">
+						<div class="footer-title">
+                            <h4>Useful Links</h4>
+                        </div>
+                        <div class="footer-contant">
+                            <ul>						
+                                <li><a [routerLink]="['/faq']">FAQ</a></li>
+                                <li><a [routerLink]="['/terms']" >Terms Of Use</a></li>
+                                <li><a [routerLink]="['/returns']">Returns</a></li>
+                                <li><a [routerLink]="['/shipping']">Shipping</a></li>
+                                <li><a [routerLink]="['/privacy-policy']" >Privacy Policy</a></li>
+                                <li><a [routerLink]="['/jobs']">Jobs</a></li>
+                            </ul>
+                        </div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="sub-title">
+						<div class="footer-title">
+						    <h4>Registered Address</h4>
+						</div>
+						<div class="footer-contant">
+						    <ul class="contact-list">
+						        <li><i class="fa fa-map-marker"></i>NH-544, Salem - Cochin National Highway
+									Near Chithode, Gangapuram, Erode-638102
+									TamilNadu, India</li>
+						        <li><i class="fa fa-phone"></i>Phone: +91 85081 09990</li>
+						        <li><i class="fa fa-phone"></i>Toll Free: 1800 12 05550</li>
+						        <li><i class="fa fa-envelope-o"></i>Email Us: <a>info@texvalleyb2b.in</a></li>
+						        <!-- <li><i class="fa fa-fax"></i>Fax: 123456</li> -->
+						    </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="sub-footer">
+		<div class="container">
+			<div class="row">
+                <div class="col-xl-6 col-md-6 col-sm-12">
+                  <div class="footer-end">
+                    <!-- <p><i class="fa fa-copyright" aria-hidden="true"></i> {{ today | date:'y'}} theme forest powered by pixelstrap</p> -->
+                  </div>
+                </div>
+                <!-- <div class="col-xl-6 col-md-6 col-sm-12">
+                  <div class="payment-card-bottom">
+                    <ul>
+                      <li>
+                        <a><img src="assets/images/icon/visa.png" alt=""></a>
+                      </li>
+                      <li>
+                        <a><img src="assets/images/icon/mastercard.png" alt=""></a>
+                      </li>
+                      <li>
+                        <a><img src="assets/images/icon/paypal.png" alt=""></a>
+                      </li>
+                      <li>
+                        <a><img src="assets/images/icon/american-express.png" alt=""></a>
+                      </li>
+                      <li>
+                        <a><img src="assets/images/icon/discover.png" alt=""></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div> -->
+            </div>
+		</div>
+	</div>
+</footer>
+<!--footer section end -->

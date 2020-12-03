@@ -1,0 +1,53 @@
+p
+{
+       line-height: 1.8;
+
+       margin-bottom: -4px;
+
+       letter-spacing: .09em;
+       display: inline;
+}
+
+section, .section-t-space {
+    padding-top: 25px;
+}
+h2 {
+    font-size: 1.5em
+}
+.timer {
+    display: block;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e4e4e4;
+    line-height: 40px;
+    padding-bottom: 15px;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    transition: all .2s linear;
+}
+.counter {
+    text-align: center;
+    color: #373737;
+    margin-bottom: 20px;
+}
+.count-type {
+    font-size: 14px;
+    color: #bbb;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    transition: all .2s linear;
+}
+.timer{
+    background-color: #ffffff;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+section.count{
+    padding-top: 0px;
+}

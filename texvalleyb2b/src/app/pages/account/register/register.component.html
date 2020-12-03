@@ -1,0 +1,269 @@
+<app-breadcrumb [title]="'Register'" [breadcrumb]="'Register'"></app-breadcrumb>
+<!-- section start -->
+<section class="register-page section-b-space"  *ngIf="isOtp==false">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>create account</h3>
+                <div class="theme-card">
+                    <form class="theme-form" [formGroup]="SignupForm" style="padding: 14px;" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="buyer_name">Buyer Name</label>
+                                <input type="text" class="form-control" id="username" formControlName="buyer_name"
+                                    placeholder="Buyer Name">
+                                <div class="help-block"
+                                    *ngIf="!SignupForm.get('buyer_name').valid&&SignupForm.get('buyer_name').touched">
+                                    <span style="color: red;"
+                                        *ngIf="SignupForm.get('buyer_name').errors['required']">Buyer name is
+                                        required</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="company_name">Company Name</label>
+                                <input type="text" class="form-control" id="company_name" formControlName="company_name"
+                                    placeholder="Company Name">
+                                <div class="help-block"
+                                    *ngIf="!SignupForm.get('company_name').valid&&SignupForm.get('company_name').touched">
+                                    <span style="color: red;"
+                                        *ngIf="SignupForm.get('company_name').errors['required']">Company name is
+                                        required</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="username">Mobile</label>
+                                <input type="number" class="form-control" id="mobile_no" formControlName="mobile_no"
+                                    placeholder="Mobile">
+                                <div class="help-block"
+                                    *ngIf="!SignupForm.get('mobile_no').valid&&SignupForm.get('mobile_no').touched">
+                                    <span style="color: red;" *ngIf="SignupForm.get('mobile_no').errors['required']">Mobile number required</span>
+                                    <span style="color: red;" *ngIf="SignupForm.get('mobile_no').errors['pattern']">Enter 10 digit Mobile Number</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" formControlName="email_id"
+                                    placeholder="Email">
+                                <div style="color: red;" class="help-block"
+                                    *ngIf="!SignupForm.get('email_id').valid && SignupForm.get('email_id').touched">
+                                     Enter valid email id
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="username">Pincode</label>
+                            <input type="text" #pincode class="form-control" id="pincode" formControlName="pincode" placeholder="pincode" (keyup)="checkPinCode(pincode.value)">
+                            <div class="help-block"
+                                *ngIf="!SignupForm.get('pincode').valid&&SignupForm.get('pincode').touched">
+                                <span class="help-block" style="color: red;"
+                                    *ngIf="SignupForm.get('pincode').errors['required']">Pincode is
+                                    required</span>
+                            </div>
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <label for="username">Area</label>
+                                <input style="display: none;" type="text" class="form-control" id="company_name" formControlName="area"
+                                    placeholder="Area">
+                                <select class="form-control" id="areaList" (change)="changeArea($event)" >
+                                    <option value="">Choose your Area</option>
+                                    <option *ngFor="let area of areas" value="{{area.area}}">{{area.area}}</option>
+                            </select>
+                                <div class="help-block"
+                                    *ngIf="!SignupForm.get('area').valid&&SignupForm.get('area').touched">
+                                    <span style="color: red;" *ngIf="SignupForm.get('area').errors['required']">Area is
+                                        required</span>
+                                </div>
+                            </div>
+                        
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="username">City</label>
+                                <input style="display: none;" type="text" class="form-control" id="company_name" formControlName="city"
+                                    placeholder="City">
+                                <select class="form-control" id="cities" (change)="changeCity($event)" >
+                                    <option value="">Choose your city</option>
+                                    <option *ngFor="let city of cities" value="{{city.city }}">{{city.city}}</option>
+                            </select>
+                                <div class="help-block"
+                                    *ngIf="!SignupForm.get('city').valid&&SignupForm.get('city').touched">
+                                    <span style="color: red;" *ngIf="SignupForm.get('city').errors['required']">City is
+                                        required</span>
+                                </div>
+                            </div>
+                                <div class="col-md-6">
+                                    <label for="username">State</label>
+                                        <input  style="display: none;" type="text" class="form-control" id="state" formControlName="state"
+                                            placeholder="state">
+                                            <select class="form-control" id="states" (change)="changeState($event)">
+                                                <option value="">Choose your State</option>
+                                                <option *ngFor="let state of stateDetails" value="{{state.state_name | uppercase}}">{{state.state_name}}</option>
+                                        </select>
+                                            
+                                        <div class="help-block"
+                                            *ngIf="!SignupForm.get('state').valid&&SignupForm.get('state').touched">
+                                            <span style="color: red;" *ngIf="SignupForm.get('state').errors['required']">State
+                                                is required
+                                            </span>
+                                        </div>
+                                </div>
+                              
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="username">Address</label>
+                                <textarea type="textArea" class="form-control" id="address" formControlName="address"
+                                    placeholder="address">
+                                 </textarea>
+                                <div class="help-block" style="margin-top: 10px;"
+                                    *ngIf="!SignupForm.get('address').valid&&SignupForm.get('address').touched">
+                                    <span style="color: red;"
+                                        *ngIf="SignupForm.get('address').errors['required']">Address is
+                                        required</span>
+                                </div>
+                            </div>
+                        </div>
+
+                <span *ngIf="isError" class="help-block" style="color: red;">
+                    {{errorMessage}}
+                </span>
+                <button style="margin-top: 10px;" class="btn btn-solid" type="submit" [disabled]="SignupForm.invalid">create Account</button>
+                </form>
+                <!-- <form class="theme-form">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="email">First Name</label>
+                                <input type="text" class="form-control" id="fname" placeholder="First Name" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="review">Last Name</label>
+                                <input type="password" class="form-control" id="lname" placeholder="Last Name" required="">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="email">email</label>
+                                <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="review">Password</label>
+                                <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
+                            </div>
+                            <button class="btn btn-solid">create Account</button>
+                        </div>
+                    </form> -->
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!--Section ends-->
+
+
+<section class="pwd-page" *ngIf="isOtp">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <h2>OTP Verification</h2>
+                <form class="theme-form">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <!-- <input type="text" class="form-control" id="email" placeholder="Enter Your Email" required=""> -->
+                            <input type="number" class="form-control" #otp id="otp"> <br/>
+                            <button class="btn btn-success" (click)="validateOTP(otp)">
+                                Validate OTP
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <form   [formGroup]="SignupForm" style="padding: 14px;" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="buyer_name">Buyer Name</label>
+      <input type="text" class="form-control" id="username" formControlName="buyer_name">
+      <span class="help-block" *ngIf="!SignupForm.get('buyer_name').valid&&SignupForm.get('buyer_name').touched">
+        <span style="color: red;" *ngIf="SignupForm.get('buyer_name').errors['required']">buyer name is
+          required</span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="company_name">Company Name</label>
+      <input type="text" class="form-control" id="company_name" formControlName="company_name">
+      <span class="help-block"
+        *ngIf="!SignupForm.get('company_name').valid&&SignupForm.get('company_name').touched">
+        <span style="color: red;" *ngIf="SignupForm.get('company_name').errors['required']">company name is
+          required</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Mobile</label>
+      <input type="number" class="form-control" id="mobile_no" formControlName="mobile_no">
+      <span class="help-block" *ngIf="!SignupForm.get('mobile_no').valid&&SignupForm.get('mobile_no').touched">
+        <span style="color: red;" *ngIf="SignupForm.get('mobile_no').errors['required']">mobile is
+          required</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email_id">
+      <span style="color: red;" class="help-block"
+        *ngIf="!SignupForm.get('email_id').valid && SignupForm.get('email_id').touched">
+        please enter a valid email id
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="username">City</label>
+      <input type="text" class="form-control" id="company_name" formControlName="city">
+      <span class="help-block" *ngIf="!SignupForm.get('city').valid&&SignupForm.get('city').touched">
+        <span style="color: red;" *ngIf="SignupForm.get('city').errors['required']">city is required</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="username">State</label>
+      <input type="text" class="form-control" id="state" formControlName="state">
+      <span class="help-block" *ngIf="!SignupForm.get('state').valid&&SignupForm.get('state').touched">
+        <span style="color: red;" *ngIf="SignupForm.get('state').errors['required']">state is required</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Address</label>
+      <input type="textArea" class="form-control" id="address" formControlName="address">
+      <span class="help-block" *ngIf="!SignupForm.get('address').valid&&SignupForm.get('address').touched">
+        <span style="color: red;" *ngIf="SignupForm.get('address').errors['required']">address is
+          required</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Pincode</label>
+      <input type="text" class="form-control" id="pincode" formControlName="pincode">
+      <span class="help-block" *ngIf="!SignupForm.get('pincode').valid&&SignupForm.get('pincode').touched">
+        <span style="color: red;" *ngIf="SignupForm.get('pincode').errors['required']">pincode is
+          required</span>
+      </span>
+    </div>
+
+    <span class="help-block" style="color: red;" *ngIf="!SignupForm.valid && SignupForm.touched">
+      please enter valid data
+    </span> 
+    <input class="btn btn-primary" type="submit" [disabled]="SignupForm.invalid" />
+  </form>   -->

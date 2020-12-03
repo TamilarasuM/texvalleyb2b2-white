@@ -1,0 +1,330 @@
+<app-breadcrumb [title]="'Cart'" [breadcrumb]="'Cart'"></app-breadcrumb>
+<!-- section start -->
+<section class="cart-section">
+    <div class="container">
+        <div class="col-sm-12 empty-cart-cls text-center" *ngIf="!products.length">
+            <img src="assets/images/icon-empty-cart.png" class="img-fluid mb-4">
+            <h3><strong>Your Cart is Empty</strong></h3>
+            <h4>Add something to make me happy :)</h4>
+        </div>
+        <div class="row" *ngIf="products.length">
+            <div class="col-sm-12">
+                <table class="table cart-table table-responsive-xs">
+                    <thead>
+                        <tr class="table-head">
+                            <th scope="col">image</th>
+                            <th scope="col">product</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">UOM</th>
+                            <th scope="col">size</th>
+                            <th scope="col">QTY</th>
+                            <th scope="col">GST%</th>
+                            <th scope="col">price</th>
+                            <th scope="col">action</th>
+                            <!-- <th scope="col">total</th> -->
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let product of products">
+                        <tr>
+                            <td>
+                                <a [routerLink]="['/shop/product/left/sidebar/', product.product_id]">
+                                    <img [src]="product.image_url" [alt]="product.images[0].alt">
+                                </a>
+                            </td>
+                            <td>
+                                <a
+                                    [routerLink]="['/shop/product/left/sidebar/', product.product_id]">{{ product.title | titlecase }}</a>
+                                <div class="mobile-cart-content row">
+                                    <div class="col-xs-3">
+                                        <div class="qty-box">
+                                            <div class="input-group">
+                                                <input type="text" name="quantity" class="form-control input-number"
+                                                    disabled [(ngModel)]="product.quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <h2 class="td-color">
+                                            {{ product.price | currency:"INR"}}
+                                        </h2>
+                                    </div>
+                                    <!-- <div class="col-xs-3">
+                                    <h2 class="td-color">
+                                        <a (click)="removeItem(product)" class="icon">
+                                            <i class="ti-close"></i>
+                                        </a>
+                                    </h2>
+                                </div> -->
+                                </div>
+                            </td>
+                            <td>
+                                {{product.tv_code}}
+                            </td>
+                            <td>
+                                {{product.UOM}}
+                            </td>
+                            <td>
+                                {{product.size}}
+                            </td>
+
+                            <td>
+                                <div class="qty-box">
+                                    <div class="input-group">
+
+                                        {{product.quantity}}
+                                        <!-- <span class="input-group-prepend">
+                                        <button type="button" class="btn quantity-left-minus" data-type="minus" (click)="decrement(product)">
+                                            <i class="ti-angle-left"></i>
+                                        </button>
+                                    </span>
+                                    <input type="text" name="quantity" class="form-control input-number" disabled [(ngModel)]="product.quantity">
+                                    <span class="input-group-prepend">
+                                        <button type="button" class="btn quantity-right-plus"  data-type="plus" (click)="increment(product)">
+                                            <i class="ti-angle-right"></i>
+                                        </button>
+                                    </span> -->
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                {{product.tax}}
+                            </td>
+                            <td>
+                                {{ product.price }}
+                                <!-- {{ (product.price | discount:product) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }} -->
+                            </td>
+                            <td>
+                                <h2 class="td-color">
+                                    <a (click)="removeItem(product)" class="icon">
+                                        <i class="ti-close"></i>
+                                    </a>
+                                </h2>
+                            </td>
+                            <!-- <td> -->
+                            <!-- <span class="cartView">
+                                <button class="btn btn-success" (click)="confirmOrder()">Confirm Order</button> 
+                            </span> -->
+                            <!-- <a href="javascript:void(0)" (click)="removeItem(product)" class="icon">
+                            <i class="ti-close"></i>  </a> -->
+                            <!-- </td> -->
+                            <!-- <td>
+                            <h2 class="td-color">
+                                {{ product.price | currency:"INR"}} 
+                               {{ ((product.price | discount:product) * product.quantity) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
+                            </h2>
+                        </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <table class="table cart-table table-responsive-md">
+                <tfoot>
+                    <tr>
+                        <td>total price :</td>
+                        <td>
+                            <h2> {{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</h2>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table> -->
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- <hr /> -->
+<!-- <section _ngcontent-serverapp-c119="" class="small-section border-section border-top-0"></section> -->
+
+<section class="section-b-space" *ngIf="isShippingDetails==true">
+    <div class="container padding-cls">
+        <div class="checkout-page">
+            <div class="checkout-form">
+                <!-- <form> -->
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12 col-xs-12">
+                        <div class="checkout-title">
+                            <h3>Shipping Details</h3>
+                        </div>
+                        <div class="row">
+                            <!-- <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <div class="field-label">First Name</div>
+                    <input type="text" name="field-name" value="" placeholder="{{shippingDetails.name}}">
+                  </div>
+                  <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <div class="field-label">Phone</div>
+                    <input type="text" name="field-name" value="" placeholder="">
+                  </div>
+                  <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <div class="field-label">Email Address</div>
+                    <input type="text" name="field-name" value="" placeholder="">
+                  </div>
+                  <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <div class="field-label">Address</div>
+                    <input type="text" name="field-name" value="" placeholder="Street address">
+                  </div>
+                  <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <div class="field-label">Town/City</div>
+                    <input type="text" name="field-name" value="" placeholder="">
+                  </div>
+                  <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                    <div class="field-label">Postal Code</div>
+                    <input type="text" name="field-name" value="" placeholder="">
+                  </div> -->
+                            <form class="theme-form" [formGroup]="SignupForm" style="padding: 14px;">
+                                <div class="form-row">
+                                    <!-- <div class="col-md-6">
+                            <label for="buyer_name">Buyer Name</label>
+                            <input type="text" class="form-control" id="username" formControlName="buyer_name" placeholder="Buyer Name">
+                            <div class="help-block" *ngIf="!SignupForm.get('buyer_name').valid&&SignupForm.get('buyer_name').touched">
+                                <span style="color: red;" *ngIf="SignupForm.get('buyer_name').errors['required']">Buyer name is
+                                    required</span>
+                            </div>
+                        </div> -->
+
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <!-- <label class="field-label">Company Name</label> -->
+                                        <div class="field-label">Company Name</div>
+                                        <input type="text" class="form-control" id="company_name"
+                                            formControlName="company_name" placeholder="Company Name">
+                                        <div class="help-block"
+                                            *ngIf="!SignupForm.get('company_name').valid&&SignupForm.get('company_name').touched">
+                                            <span style="color: red;"
+                                                *ngIf="SignupForm.get('company_name').errors['required']">Company name
+                                                is
+                                                required</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="field-label">Mobile</div>
+                                        <input type="number" class="form-control" id="mobile_no"
+                                            formControlName="mobile_no" placeholder="Mobile">
+                                        <div class="help-block"
+                                            *ngIf="!SignupForm.get('mobile_no').valid&&SignupForm.get('mobile_no').touched">
+                                            <span style="color: red;"
+                                                *ngIf="SignupForm.get('mobile_no').errors['required']">Mobile number
+                                                required</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="field-label">Shipping Address</div>
+                                        <input type="textArea" class="form-control" id="address"
+                                            formControlName="address" placeholder="address">
+                                        <div class="help-block"
+                                            *ngIf="!SignupForm.get('address').valid&&SignupForm.get('address').touched">
+                                            <span style="color: red;"
+                                                *ngIf="SignupForm.get('address').errors['required']">Address is
+                                                required</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="field-label">Email</div>
+                                        <input type="email" class="form-control" id="email" formControlName="email_id"
+                                            placeholder="Email">
+                                        <div style="color: red;" class="help-block"
+                                            *ngIf="!SignupForm.get('email_id').valid && SignupForm.get('email_id').touched">
+                                            Enter valid email id
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">City</div>
+                                        <input type="text" class="form-control" id="company_name" formControlName="city"
+                                            placeholder="City">
+
+                                        <div class="help-block"
+                                            *ngIf="!SignupForm.get('city').valid&&SignupForm.get('city').touched">
+                                            <span style="color: red;"
+                                                *ngIf="SignupForm.get('city').errors['required']">City is
+                                                required</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Pincode</div>
+                                        <input type="text" class="form-control" id="pincode" formControlName="pincode"
+                                            placeholder="pincode">
+                                        <div class="help-block"
+                                            *ngIf="!SignupForm.get('pincode').valid&&SignupForm.get('pincode').touched">
+                                            <span class="help-block" style="color: red;"
+                                                *ngIf="SignupForm.get('pincode').errors['required']">Pincode is
+                                                required</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- <button class="btn btn-solid" type="submit" [disabled]="SignupForm.invalid">create Account</button> -->
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-sm-12 col-xs-12">
+                        <div class="checkout-details">
+                            <div class="order-box">
+                                <div class="title-box">
+                                    <div>Order Details <span> </span></div>
+                                </div>
+                                <ul class="qty">
+                                    <!-- <li *ngFor="let product of products">{{product.title}} × {{product.quantity}} <span> {{product.total}}</span></li> -->
+                                    <li>Total <span>{{getTotal | number : '1.2-2'}}</span></li>
+                                    <li>Total tax (GST)<span>{{totalTax  | number : '1.2-2'}}</span></li>
+                                    <li>Shipping Charge<span>{{ 0 | number : '1.2-2'}}</span></li>
+                                    <li>Coupon amount <span>{{couponAmt | number : '1.2-2'}}</span></li>
+                                    <li><input #couponcode [value]="couponCode" /> </li>
+                                    <li style="color: #ff4c3b;margin-top: -10px;"
+                                        (click)="applyCouponCode(couponcode.value)">Apply Coupon</li>
+                                </ul>
+                                <!-- <ul class="sub-total">
+                      <li>Subtotal <span class="count">$380.10</span></li>
+                      <li>Shipping <div class="shipping">
+                        <div class="shopping-option">
+                          <input type="checkbox" name="free-shipping" id="free-shipping">
+                          <label for="free-shipping">Free Shipping</label>
+                        </div>
+                        <div class="shopping-option">
+                          <input type="checkbox" name="local-pickup" id="local-pickup">
+                          <label for="local-pickup">Local Pickup</label>
+                        </div>
+                      </div>
+                      </li>
+                    </ul> -->
+
+                                <ul class="total">
+                                    <li>Amount Payable <span class="count">{{totalAmt | currency:"INR"}}</span></li>
+                                </ul>
+                            </div>
+
+
+                            <div class="text-right">
+                                <a (click)="confirmOrder()" class="btn-solid btn">Place Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- </form> -->
+            </div>
+        </div>
+        <!-- <div class="row cart-buttons" *ngIf='products.length'>
+        <div class="col-6">
+            <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-solid" (click)="confirmOrder()">check out</a>
+        </div>
+    </div> -->
+    </div>
+</section>
+<!--section end-->

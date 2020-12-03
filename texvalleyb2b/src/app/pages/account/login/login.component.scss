@@ -1,0 +1,26 @@
+.loginOR{
+    padding: 2em;
+}
+.pwd{
+    position: relative;
+}
+.forget{
+    // position: absolute;
+    // right:0;
+    // top: 40px;
+    // right:10px
+    position: relative;
+    top: -10px;
+    width: 100%;
+    text-align: right;
+}
+.sentOTP{
+    text-align: right;
+    margin-bottom: 15px;
+    margin-top: -8px;
+
+    // text-decoration: underline;
+}
+.sentOTP span{
+    cursor: pointer;
+}

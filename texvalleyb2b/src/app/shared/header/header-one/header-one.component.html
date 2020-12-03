@@ -1,0 +1,175 @@
+<header class="sticky" [ngClass]="class" [class.fixed]="stick && sticky">
+  <div class="mobile-fix-option"></div>
+  <div class="top-header" *ngIf="topbar">
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="header-contact">
+            <ul>
+              <li>From Manufacturers to Retailers</li>
+              <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 1800 120 5550</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!--    <div class="col-lg-6 text-right">
+          <ul class="header-dropdown">
+            <li class="compare">
+              <a [routerLink]="['/shop/compare']"><i class="fa fa-random" aria-hidden="true"></i>Compare</a>
+            </li>
+            <li class="mobile-wishlist">
+              <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
+            </li>
+            <li class="onhover-dropdown mobile-account">
+              <i class="fa fa-user" aria-hidden="true"></i> My Account
+              <ul class="onhover-show-div">
+                <ng-container *ngIf="isLogin==false">
+                  <li>
+                    <a data-lng="en"  [routerLink]="['/pages/login']">
+                      Login
+                    </a>
+                  </li>
+                  <li>
+                    <a data-lng="en"  [routerLink]="['/pages/register']">
+                      Register
+                    </a>
+                  </li>
+                </ng-container>
+                
+                <ng-container *ngIf="isLogin==true">
+                  <li >
+                    <a>
+                      Welcome {{userName}}
+                    </a>
+                  </li>
+                  <li >
+                    <a [routerLink]="['/pages/profile']">
+                     My Profile
+                    </a>
+                  </li>
+                  <li >
+                    <a [routerLink]="['/pages/kyc']">
+                     My KYC
+                    </a>
+                  </li>
+                  <li >
+                    <a [routerLink]="['/shop/cart']">
+                     My Cart
+                    </a>
+                  </li>
+                
+                  
+                  <li >
+                    <a [routerLink]="['/pages/order-details']">
+                     My Orders
+                    </a>
+                  </li>
+                  <li>
+                    <a (click)="logout()">
+                      Logout
+                    </a>
+                  </li>
+                </ng-container>
+              
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <div class="container" style="  background-color:#fff;max-width: 100%;">
+  <!-- <div class="container" style="  background-color: #2a6cb3;max-width: 100%;"> -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div (click)="open()" class="stock-search-component-small">
+          <div class="stock-search">
+            <input [ngModel]="search" #box (ngModelChange)="searchFunc($event)" (keydown.enter)="searchData($event)" class="search-box nav-menu a" placeholder="Search products, brands and more..." title="Search for stock information" />
+
+            <div class="icon-search-wrapper">
+              <!-- <i class="fas fa-search"></i> -->
+              <a  [routerLink]="['/shop/products',search]">
+              <svg width="20" height="20" viewBox="0 0 17 18" class="" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#2874F1" fill-rule="evenodd">
+                  <path class="_34RNph"
+                    d="m11.618 9.897l4.225 4.212c.092.092.101.232.02.313l-1.465 1.46c-.081.081-.221.072-.314-.02l-4.216-4.203">
+                  </path>
+                  <path class="_34RNph"
+                    d="m6.486 10.901c-2.42 0-4.381-1.956-4.381-4.368 0-2.413 1.961-4.369 4.381-4.369 2.42 0 4.381 1.956 4.381 4.369 0 2.413-1.961 4.368-4.381 4.368m0-10.835c-3.582 0-6.486 2.895-6.486 6.467 0 3.572 2.904 6.467 6.486 6.467 3.582 0 6.486-2.895 6.486-6.467 0-3.572-2.904-6.467-6.486-6.467">
+                  </path>
+                </g>
+              </svg>
+            </a>
+            </div>
+          </div>
+
+          <div *ngIf="searchTickers.length && show" (click)="clear && hide" class="stock-search-result">
+            <div *ngFor="let stock of searchTickers" class="search-result-item">
+              <a [routerLink]="['/shop/products',stock.stockExchange]">
+                <div class="search-result-image">
+                  <img [src]="getStockImage(stock.symbol)" [alt]="stock.name" />
+                </div>
+
+                <div class="search-result-name">
+
+                  <strong>{{ stock.stockExchange }}</strong>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="header-1r-optoions">
+            <!-- *ngIf="isLogin" -->
+            <span class="profile" >
+              <a [routerLink]="['/profile']"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
+            </span>
+            <!-- <span class="mobile-wishlist">
+              <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
+            </span> -->
+            <!-- <app-settings></app-settings> -->
+            <!-- *ngIf="isLogin" -->
+            <span class="mobile-cartd" >
+              <a [routerLink]="['/shop/cart']"><i class="fa" aria-hidden="true">
+                <svg class="V3C5bO" width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path class="_1bS9ic" d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="#fff"></path></svg>
+              </i>Cart</a>
+            </span>
+
+            <span class="mobile-cartd">
+              <a href="tel:1800 12 05550" ><i class="fa fa-phone" aria-hidden="true">              
+              </i>1800 12 05550</a>
+            </span>
+           
+
+            <!-- <span class="mobile-cart cart-customized">
+              <a [routerLink]="['/shop/cart']"><i class="fa" aria-hidden="true">
+                <svg class="V3C5bO" width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path class="_1bS9ic" d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="#fff"></path></svg>
+              </i>Cart</a>
+            </span> -->
+
+            
+          </div>
+
+        </div>
+        <div class="main-menu">
+          <div class="menu-left">
+            <app-left-menu></app-left-menu>
+            <div class="brand-logo">
+              <a routerLink="/home/fashion" id="headerlogo">
+                <img src='https://texvalleyb2b.in/images/tlogo.png' class="img-fluid" alt="Texvalley">
+              </a>
+            </div>
+          </div>
+          <div class="menu-right pull-right testClass">
+            <div>
+              <app-menu></app-menu>
+            </div>
+            <div>
+              <app-settings></app-settings>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

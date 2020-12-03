@@ -1,0 +1,70 @@
+<app-breadcrumb [title]="'Login'" [breadcrumb]="'Login'"></app-breadcrumb>
+<!-- section start -->
+<section class="login-page section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Login</h3>
+                <div class="theme-card">
+                    <form class="theme-form" *ngIf="isOTP==false" [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="form-group">
+                            <label for="email">Enter Email/Mobile number</label>
+                            <input #username for="username" type="text" class="form-control" id="username" placeholder="Username" required="" formControlName="username">
+                            <div style="margin-top: -1em;" class="help-block" *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">
+                            <span style="color: red;" *ngIf="loginForm.get('username').errors['required']">Username is required </span>
+                            </div>
+                        </div>
+                        <div class="form-group" class="pwd">
+                            <label for="password">Enter Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" required="" formControlName="password"> 
+                            <div style="margin-top: -1em;" class="help-block" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+                                <span style="color: red;" *ngIf="loginForm.get('password').errors['required']">Password is required </span>
+                            </div>
+                            <label class="forget" (click)="forgetPWD()" style="cursor: pointer;" > <u>Forget Password?</u> </label>
+                        </div>
+                        <button class="btn btn-solid" type="submit">Login</button>
+                        <span class="loginOR">OR</span>
+                        <button class="btn btn-solid" (click)="changeOTP()"> OTP Login</button>
+                    </form>
+
+                    <form class="theme-form" *ngIf="isOTP" [formGroup]="otpForm" >
+                        <div class="form-group">
+                            <label for="email">Enter Email/Mobile number</label>
+                            <input #username for="username" type="text" class="form-control" id="username" placeholder="Username" required="" formControlName="username">
+                            <div style="margin-top: -1em;" class="help-block" *ngIf="!otpForm.get('username').valid && otpForm.get('username').touched">
+                            <span style="color: red;" *ngIf="otpForm.get('username').errors['required']">Username is required </span>
+                            </div>
+                        </div>
+                        <div class="sentOTP btn btn-solid">
+                           <span (click)="otpRequest()">Get OTP</span> 
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Enter the OTP or  
+                                <b style="color: var(--theme-deafult)" (click)="toggleView()">try with password</b></label>
+                            <input #otpvalue for="username" type="text" class="form-control" id="username" placeholder="Enter OTP " required="">
+                            <div style="margin-top: -1em;" class="help-block" *ngIf="!otpForm.get('username').valid && otpForm.get('username').touched">
+                            <span style="color: red;" *ngIf="otpForm.get('username').errors['required']">OTP is required </span>
+                            </div>
+                        </div>
+                        <button class="btn btn-solid" (click)="verifyOTP(otpvalue.value)">Verify</button>
+                        <!-- <span>OR</span>
+                        <button class="btn btn-solid" (click)="otpRequest(username.value)">Request OTP</button> -->
+                    </form>
+                    
+
+                   
+                    
+                </div>
+            </div>
+            <div class="col-lg-6 right-login">
+                <h3>New Customer</h3>
+                <div class="theme-card authentication-right">
+                    <h6 class="title-font">Create A Account</h6>
+                    <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
+                    <button class="btn btn-solid" [routerLink]="['/register']" >Create an Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Section ends-->

@@ -1,0 +1,93 @@
+<div *ngIf="!loader" class="productInfo">
+  <div class="img-wrapper">
+    <div class="lable-block">
+      <span class="lable3" *ngIf="product?.discount_p">{{product.discount_p}} OFF</span>
+      <!-- <span class="lable4" *ngIf="product.sale">on sale</span> -->
+    </div>
+    <div class="front">
+      <ng-container *ngIf='segmentView==false'> 
+      <a [routerLink]="['/shop/product/left/sidebar/', product.product_id]">
+        <img 
+          [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
+          [lazyLoad]="ImageSrc ? ImageSrc : product?.image_url" 
+          class="img-fluid lazy-loading" 
+          alt="{{ product.images[0].alt }}" />
+      </a>
+      </ng-container>
+      <ng-container *ngIf="segmentView">
+        <a [routerLink]="['/shop/collection/left/sidebar', product.id, product.category]">
+          <img 
+            [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
+            [lazyLoad]="ImageSrc ? ImageSrc : product?.image_url" 
+            class="img-fluid lazy-loading" 
+            alt="{{ product.images[0].alt }}" />
+        </a>
+      </ng-container>
+
+    </div>
+    <!-- <div class="back" *ngIf="onHowerChangeImage">
+      <a [routerLink]="['/shop/product/left/sidebar/', product.product_id]">
+        <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product.images[1].alt }}">
+      </a>
+    </div> -->
+    <!-- test -->
+    <!-- <ul class="product-thumb-list" *ngIf="thumbnail">
+      <li class="grid_thumb_img" [class.active]="ImageSrc == image.src" *ngFor="let image of product.images">
+        <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image.src)">
+          <img [lazyLoad]="image.src">
+        </a>
+      </li>
+    </ul> -->
+    <!-- <div class="cart-info cart-wrap">
+      <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(product)"
+        *ngIf="cartModal">
+        <i class="ti-shopping-cart"></i>
+      </a>
+      <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(product)"
+        *ngIf="!cartModal">
+        <i class="ti-shopping-cart"></i>
+      </a>
+      <a href="javascript:void(0)" title="Add to Wishlist" (click)="addToWishlist(product)">
+        <i class="ti-heart" aria-hidden="true"></i>
+      </a>
+      <a href="javascript:void(0)" title="Quick View" (click)="QuickView.openModal()">
+        <i class="ti-search" aria-hidden="true"></i>
+      </a>
+      <a href="javascript:void(0)" title="Compare" (click)="addToCompare(product)">
+        <i class="ti-reload" aria-hidden="true"></i>
+      </a>
+    </div> -->
+  </div>
+  <div class="product-detail">
+    <div style="margin-top: -30px;">
+      <ng-container *ngIf="segmentView">
+        <bar-rating  style="visibility: hidden;" [rate]="5" [readOnly]="true"></bar-rating>
+        <a [routerLink]="['/shop/collection/left/sidebar/', product.id, product.category]">
+          <h6>{{ product?.title | titlecase }}</h6>
+        </a>
+      </ng-container>
+      <ng-container *ngIf='segmentView==false'> 
+          <bar-rating style="visibility: hidden;" [rate]="5" [readOnly]="true"></bar-rating>
+          <a [routerLink]="['/shop/product/left/sidebar/', product.product_id]">
+            <h6>{{ product?.title | titlecase }}</h6>
+          </a>
+          <p>{{ product?.description }}</p>
+          <span><b style="color: #777676;">Code:</b>  {{ product?.tv_code }}</span>
+          <div>
+              <b style="color: #777676;">{{product?.price | discount:product }}</b>
+            <!-- {{ product?.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }} -->
+            <del *ngIf="product?.discount_cost && isLogin && isKYCVerified"><span class="money"> {{ product?.discount_cost}}</span></del>
+          </div>
+        </ng-container>
+      <!-- <ul class="color-variant" *ngIf="Color(product?.variants).length">
+        <li [class]="color" *ngFor="let color of Color(product?.variants)" [ngStyle]="{'background-color': color}"
+          (click)="ChangeVariants(color, product)">
+        </li>
+      </ul> -->
+    </div>
+  </div>
+</div>
+<app-skeleton-product-box *ngIf="loader"></app-skeleton-product-box>
+<app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view>
+<app-cart-modal #cartModal [product]="product" [currency]="currency" *ngIf="cartModal"></app-cart-modal>
+
