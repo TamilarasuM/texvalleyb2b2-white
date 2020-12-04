@@ -173,7 +173,7 @@ export class ForgetPasswordComponent implements OnInit {
         }
       }
       this.prdSRC.updateKYC(params).subscribe(res => {
-        debugger
+        
         if(res !=null && res[0] !=null ) {
           this.tst.success(res[0].status)
           setTimeout((function (args) {

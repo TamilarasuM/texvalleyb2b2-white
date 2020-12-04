@@ -22,7 +22,8 @@ export class Resolver implements Resolve<Product> {
   // Resolver
   async resolve(route: ActivatedRouteSnapshot): Promise<any> {
     debugger
-    await new Promise(resolve => setTimeout(resolve, 1000));    
+    let prmse = await Promise;
+    //await new Promise(resolve => setTimeout(resolve, 1000));  
     var segmentID= route.params["id"];
     var productname = route.params["name"];
     var search = route.params["search"];
@@ -38,6 +39,7 @@ export class Resolver implements Resolve<Product> {
                 responseList[i]["images"][0].src = responseList[i].image_url;
             }
             this.product = responseList;
+            prmse.resolve();
             this.dataList.next(responseList);
           }
         }).bind(this)))
@@ -55,6 +57,7 @@ export class Resolver implements Resolve<Product> {
               responseList[i]["images"][0].src = responseList[i].image_url;
           }
           this.product = responseList;
+          prmse.resolve();
           this.dataList.next(responseList);
         }
       }).bind(this)))
@@ -77,7 +80,9 @@ export class Resolver implements Resolve<Product> {
               responseList[i].image_url = responseList[i].image;
               responseList[i]["images"][0].src= responseList[i].image;
             }
-            this.dataList.next(responseList)
+            prmse.resolve();
+            this.dataList.next(responseList);
+            
             // this.products = responseList;
           }
         }

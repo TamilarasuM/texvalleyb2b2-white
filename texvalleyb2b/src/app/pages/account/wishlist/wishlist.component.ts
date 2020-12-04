@@ -10,6 +10,8 @@ export class WishlistComponent implements OnInit {
 
   isWishlist =false;
   orderDetails =[];
+  orderCollection =[];
+  showPopup =false;
   constructor(private productDetails:ProductService) { }
 
   ngOnInit(): void {
@@ -23,6 +25,17 @@ export class WishlistComponent implements OnInit {
         // this.totalAmt = walAMt;
       }
 )
+  }
+
+  public getDetails(orderID) {
+    this.showPopup =true;
+    this.productDetails.getOrderCollectionDetail(orderID).subscribe( ( function(res) {
+      this.orderCollection = res;
+      debugger
+    }).bind(this))
+  }
+  toggle() {
+    this.showPopup = !this.showPopup ;
   }
 
 }

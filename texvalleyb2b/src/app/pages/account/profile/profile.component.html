@@ -72,7 +72,7 @@
                         <div class="col-md-6">
                             <label for="username">City</label>
                             <input  type="text" class="form-control" id="company_name" formControlName="city"
-                                placeholder="City">
+                                placeholder="city">
                     
                             <div class="help-block"
                                 *ngIf="!SignupForm.get('city').valid&&SignupForm.get('city').touched">
@@ -84,6 +84,26 @@
                     </div>
 
                     <div class="form-row">
+                        
+  
+                        <div class="col-md-6">
+                            <label for="username">Area</label>
+                            <input type="textArea" class="form-control" id="area" formControlName="area" placeholder="area">
+                            <div class="help-block" *ngIf="!SignupForm.get('area').valid&&SignupForm.get('area').touched">
+                                <span style="color: red;" *ngIf="SignupForm.get('area').errors['required']">area is
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="username">Pincode</label>
+                            <input type="textArea" class="form-control" id="pincode" formControlName="pincode" placeholder="pincode">
+                            <div class="help-block" *ngIf="!SignupForm.get('pincode').valid&&SignupForm.get('pincode').touched">
+                                <span style="color: red;" *ngIf="SignupForm.get('pincode').errors['required']">pincode is
+                                    required</span>
+                            </div>
+                        </div>
+
                         <div class="col-md-6">
                             <label for="username">Address</label>
                             <textarea type="textArea" class="form-control" id="address" formControlName="address"
@@ -96,17 +116,16 @@
                              </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="username">GSTIN</label>
-                            <input type="textArea" class="form-control" id="address" formControlName="gst_no"
-                                placeholder="GSTIN">
+                            <label for="username">Shipping Address</label>
+                            <textarea type="textArea" class="form-control" id="saddress" formControlName="shippingaddress"
+                                placeholder="Shipping address"></textarea>
                             <div class="help-block"
-                                *ngIf="!SignupForm.get('gst_no').valid&&SignupForm.get('gst_no').touched">
+                                *ngIf="!SignupForm.get('shippingaddress').valid&&SignupForm.get('shippingaddress').touched">
                                 <span style="color: red;"
-                                    *ngIf="SignupForm.get('gst_no').errors['required']">gst_no is
+                                    *ngIf="SignupForm.get('shippingaddress').errors['required']">Shipping Address is
                                     required</span>
+                             </div>
                         </div>
-                        </div>
-
                     <!-- <div class="col-md-6">
                         <label for="username">Pincode</label>
                         <input type="text" class="form-control" id="pincode" formControlName="pincode"

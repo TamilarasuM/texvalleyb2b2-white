@@ -122,6 +122,15 @@ export class ProductService {
     return this.http.post<any>(url, JSON.stringify(params));
   }
 
+  public getOrderCollectionDetail(orderId) {
+
+    var params = JSON.parse(localStorage.getItem("LoginDetails"));
+    params.order_id = orderId;
+    var url = "https://stage.texvalleyb2b.in/api_web/get_order_items.php";
+    return this.http.post<any>(url, JSON.stringify(params));
+
+  }
+
   // Get Products
   public get getProducts(): Observable<Product[]> {
     return this.products;

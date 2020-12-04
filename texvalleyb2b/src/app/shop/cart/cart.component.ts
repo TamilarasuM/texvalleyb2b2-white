@@ -70,7 +70,7 @@ export class CartComponent implements OnInit {
     var productList = [];
     this.totalTax =0;
     var priceSum = 0;
-    debugger
+    
     for (var i = 0; i < response.length; i++) {
       this.couponCode = response[0].coupon_code;
       this.couponAmt =  parseInt(response[i].coupon_amount);
@@ -86,9 +86,9 @@ export class CartComponent implements OnInit {
   }
 
   public applyCouponCode(code){
-    debugger
+    
     this.productService.applyCouponCode(code).subscribe( (function (res) { 
-      debugger
+      
       if(res[0].status != 1)
       this.tst.error(res[0].message)
       else {

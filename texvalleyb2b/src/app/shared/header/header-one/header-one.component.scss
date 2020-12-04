@@ -148,7 +148,7 @@
          padding: 0.5em;
     //   border-radius: 5px;
       background-color: #fff;
-      width: 560px;
+      width: 500px;
       font-size: 14px;
     }
     .search-box {
@@ -241,6 +241,15 @@
    .stock-search-result {
      width: 100% !important;
    }
+   .mobile-menu-search
+   {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 15px;
+}
+.header-1r-optoions {
+  margin-top: 10px;
+}
 }
 
 .header-1r-optoions a{

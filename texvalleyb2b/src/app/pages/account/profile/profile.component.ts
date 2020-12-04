@@ -21,10 +21,12 @@ export class ProfileComponent implements OnInit {
       'mobile_no': new FormControl(null, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       'email_id': new FormControl(null, [Validators.required, Validators.email]),
       'address': new FormControl(null, [Validators.required]),
-      'gst_no': new FormControl(null, [Validators.required]),
+      'shippingaddress': new FormControl(null, [Validators.required]),
+      // 'gst_no': new FormControl(null, [Validators.required]),
       'city': new FormControl([], [Validators.required]),
       'state': new FormControl([], [Validators.required]),
-      // 'pincode': new FormControl(null, [Validators.required]),
+      'pincode': new FormControl(null, [Validators.required]),
+      'area': new FormControl(null, [Validators.required]),
     });
     this.productService.getProfile().subscribe((res) => {
       if (res.length > 0) {
@@ -32,13 +34,15 @@ export class ProfileComponent implements OnInit {
           this.SignupForm.patchValue(
           {
             address: res[0].address,
+            shippingaddress: res[0].shipping_address,
             buyer_name: res[0].contact_name,
             company_name: res[0].company_name,
             email_id: res[0].email_id,
             mobile_no: res[0].mobile_no,
-            // pincode: res[0].pin_code,
-            // city: res[0].city,
-            // state: res[0].state
+            pincode: res[0].pin_code,
+            city: res[0].city,
+            state: res[0].state,
+            area: res[0].area,
           }
         )
       }

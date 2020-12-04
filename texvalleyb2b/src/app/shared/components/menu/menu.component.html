@@ -39,7 +39,9 @@
           <span class="sub-arrow" *ngIf="menuItem.children"></span>
         </a>
         <!-- External Link -->
-        <a href="{{ menuItem.path }}" class="nav-link" *ngIf="menuItem.type === 'extLink'">
+        <!-- [ngClass]="{'text-success': menuItem.removePadding }" -->
+
+        <a href="{{ menuItem.path }}" class="nav-link" *ngIf="menuItem.type === 'extLink'"   [ngStyle]="{'padding-right':menuItem.removePadding ? '20px' : '45px' }">
           {{ menuItem.title }}
           <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
           <span class="sub-arrow" *ngIf="menuItem.children"></span>
@@ -198,7 +200,7 @@
                             <span class="new-tag" *ngIf="childrenSubItem.badge">{{ childrenSubItem.badgeText | translate }}</span>
                           </a>
                           <!-- External Link -->
-                          <a href="{{ childrenSubItem.path }}"
+                          <a href="{{ childrenSubItem.path }}" 
                             *ngIf="childrenSubItem.type === 'extLink' ">
                             {{ childrenSubItem.title | translate }}
                             <span class="new-tag" *ngIf="childrenSubItem.badge">{{ childrenSubItem.badgeText | translate }}</span>

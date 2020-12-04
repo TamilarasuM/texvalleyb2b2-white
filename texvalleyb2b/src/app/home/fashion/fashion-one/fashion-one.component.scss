@@ -2,3 +2,27 @@
     height: 215px;
     width: 280px;
 }
+
+.count-type {
+    text-align: center;
+    font-size: 18px;
+    color: #bbb;
+    transition: all .2s linear;
+}
+
+.timer1 {
+    color: #222222;
+    display: block;
+    font-size: 30px;
+    font-weight: 800;
+    // margin-bottom: 15px;
+    border-bottom: 1px solid #e4e4e4;
+    line-height: 40px;
+    // padding-bottom: 15px;
+    transition: all .2s linear;
+    text-align: center;
+}
+
+.content.count {
+ padding-top: 30px;
+}

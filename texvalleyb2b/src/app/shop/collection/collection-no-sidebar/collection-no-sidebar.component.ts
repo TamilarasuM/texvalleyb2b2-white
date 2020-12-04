@@ -43,7 +43,7 @@ export class CollectionNoSidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
+    
     this.routSrc.dataList.subscribe((function (response) {
       this.segmentInfo = this.routSrc.segmenetName;
       this.products = response;

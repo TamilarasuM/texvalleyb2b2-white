@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router, public navServices: NavService, public productSvc:ProductService) {
     this.navServices.items.subscribe(menuItems => {
       if(menuItems.length>0){
-        debugger
+        
         menuItems =  menuItems.filter( function(args) {  
           if(!(args.title.indexOf("My Account")>-1 || args.title.indexOf("Login")>-1 || args.title.indexOf("Buyer Benifits")>-1 || args.title.indexOf("Why Texvalley B2B")>-1))
           return args;

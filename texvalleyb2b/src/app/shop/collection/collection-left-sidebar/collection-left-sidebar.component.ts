@@ -89,7 +89,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
       
     })
     this.resolverSVC.currentProduct.subscribe(  (function(res){
-      debugger
+      
       this.productname = res;
     }).bind(this))
 //  console.log(':::::::Inside Collection left sidebar::::::',new Date())

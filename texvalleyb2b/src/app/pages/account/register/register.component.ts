@@ -127,7 +127,7 @@ export class RegisterComponent implements OnInit {
     if(pincodeValue.length==6){
       this.httpClient.post<any>(" https://stage.texvalleyb2b.in/api_web/get_pincode.php", JSON.stringify({pincode:pincodeValue})).subscribe(
         res => {
-        debugger
+        
         if(res && res.length>0 && res[0].state) {
         this.SignupForm.patchValue({ "state": res[0].state });
         this.SignupForm.patchValue({ "city": res[0].city });
@@ -138,16 +138,16 @@ export class RegisterComponent implements OnInit {
           if (res[0].state.indexOf(args.state_name) > -1) {
             this.cities = args.cities; 
             this.areas = res[0].area;
-            debugger
+            
           }
         });
         setTimeout(() => {
-          debugger
+          
           (<HTMLInputElement>document.getElementById("cities")).value = res[0].city;
         }, 1200);
 
         setTimeout(() => {
-          debugger
+          
           (<HTMLInputElement>document.getElementById("areaList")).value = res[0].area[0].area;
         }, 1200);
        

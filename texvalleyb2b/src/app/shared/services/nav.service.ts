@@ -198,8 +198,8 @@ export class NavService {
 			{ megaMenu: false, title: "Register", path: '/register', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
 			]
 
-			menuItems.push({ megaMenu: false, title: "Buyer Benifits", path: '/buyer', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 })
-			menuItems.push({ megaMenu: false, title: "Why Texvalley B2B?", path: '/whyb2b', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 })
+			menuItems.push({ megaMenu: false, removePadding:true, title: "Buyer Benifits", path: '/buyer', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 })
+			menuItems.push({ megaMenu: false, removePadding:true, title: "Why Texvalley B2B?", path: '/whyb2b', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 })
 		
 			menuItems.push({ title: this.isLogin ? "My Account" : "Login/Register", megaMenu: false, segment_ID: 1, type: 'sub', active: false, children: myccMenu })			
 		return menuItems;
