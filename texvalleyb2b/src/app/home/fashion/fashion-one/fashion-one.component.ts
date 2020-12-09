@@ -4,6 +4,7 @@ import { Product } from '../../../shared/classes/product';
 import { ProductSlider } from '../../../shared/data/slider';
 import { ProductService } from '../../../shared/services/product.service';
 
+
 @Component({
   selector: 'app-fashion-one',
   templateUrl: './fashion-one.component.html',
@@ -12,6 +13,12 @@ import { ProductService } from '../../../shared/services/product.service';
 })
 export class FashionOneComponent implements OnInit {
 
+  public countovalue;
+  public counto2value;
+  public counto3value;
+
+  public value:number =1;
+  public number: number = 1000;
   public products: Product[] = [];
   public newArivals: Product[] = [];
   public topCollections: Product[] = [];
@@ -35,6 +42,10 @@ export class FashionOneComponent implements OnInit {
       this.salesList = this.convertAppProduct(response[0].on_sales);
     })
   }
+
+  onCountoEnd(): void {
+    console.log('counto end');
+}
 
   public convertAppProduct(newArrival){
     var newArrivalList=[];

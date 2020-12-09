@@ -23,7 +23,7 @@ export class ProductService {
   public isLogin: boolean = false;
   public Products;
   public cartDetails = new BehaviorSubject([]);
-  public templateProduct = {"id":1,"title":"Kids T-Shirt- Sivam","description":" desc","type":"fashion","brand":"nike","collection":["new products"],"category":"Women","price":"550.00","sale":true,"stock":5000,"new":true,"tags":[],"variants":[{"variant_id":101,"id":1,"sku":"sku1","size":"S","color":"#ff0000","image_id":111}],"images":[{"image_id":111,"id":1,"alt":"yellow","src":"//stage.texvalleyb2b.in/undefined","variant_id":[101,104]}],"quantity":3}
+  public templateProduct = { "id": 1, "title": "Kids T-Shirt- Sivam", "description": " desc", "type": "fashion", "brand": "nike", "collection": ["new products"], "category": "Women", "price": "550.00", "sale": true, "stock": 5000, "new": true, "tags": [], "variants": [{ "variant_id": 101, "id": 1, "sku": "sku1", "size": "S", "color": "#ff0000", "image_id": 111 }], "images": [{ "image_id": 111, "id": 1, "alt": "yellow", "src": "//stage.texvalleyb2b.in/undefined", "variant_id": [101, 104] }], "quantity": 3 }
   public templateJSON = {
     "id": 1, "title": "trim dress", "description": " desc", "type": "fashion", "brand": "nike", "collection": ["new products"], "category": "Women", "price": 145, "sale": true,
     // "discount":"40",
@@ -42,9 +42,9 @@ export class ProductService {
     ]
   }
   constructor(private http: HttpClient,
-    private toastrService: ToastrService) { 
-      this.isLogin =	localStorage.getItem("LoginDetails") == null? false:true;
-    }
+    private toastrService: ToastrService) {
+    this.isLogin = localStorage.getItem("LoginDetails") == null ? false : true;
+  }
 
   /*
     ---------------------------------------------
@@ -60,55 +60,50 @@ export class ProductService {
     return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
   }
 
-  public getProductSearchList(search:string) {
-    var params = {keyword: search}//{ "segment_id": S_ID, "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": pname}
+  public getProductSearchList(search: string) {
+    var searchURL ="https://stage.texvalleyb2b.in/api_web/get_search_products.php";
+    var params = { keyword: search }//{ "segment_id": S_ID, "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": pname}
     var headers = Object.assign(params, JSON.parse(localStorage.getItem("LoginDetails")))
-    return this.http.post<any>("https://stage.texvalleyb2b.in/api_web/get_search_products.php", JSON.stringify(headers))
+    return this.http.post<any>(searchURL, JSON.stringify(headers))
   }
   public getProductList(S_ID: string, pname: string) {
-    var params = { "segment_id": S_ID, "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": pname}
+    var getProductListURL=  "https://stage.texvalleyb2b.in/api_web/get_product.php";
+    var params = { "segment_id": S_ID, "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": pname }
     var headers = Object.assign(params, JSON.parse(localStorage.getItem("LoginDetails")))
-    return this.http.post<any>("https://stage.texvalleyb2b.in/api_web/get_product.php", JSON.stringify(headers))
+    return this.http.post<any>(getProductListURL, JSON.stringify(headers))
   }
-  
 
-  public getNewArivals(){
-    var params = { "segment_id": "", "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": ""}
+
+  public getNewArivals() {
+    var params = { "segment_id": "", "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": "" }
     var headers = Object.assign(params, JSON.parse(localStorage.getItem("LoginDetails")))
     return this.http.post<any>("https://stage.texvalleyb2b.in/api_web/get_new_arrival.php", JSON.stringify(headers))
   }
 
   public getState() {
-    return this.http.get<any>("https://stage.texvalleyb2b.in/api_web/get_state.php").pipe(map(data => { return data }))
+    var getState= "https://stage.texvalleyb2b.in/api_web/get_state.php";
+    return this.http.get<any>(getState).pipe(map(data => { return data }))
   }
 
   public addCartDetails(product) {
-    // var productDetails = {price: product["price"],quantity: product.quantity, productID: this.productID , a_id: this.a_id}
-    var params = {
-      // "login_id": 1,
-      // "c_id": 1,
-      "a_id": product.a_id,
-      "product_id": product.productID,//addInfo["product_id"],
-      "quantity": product.quantity,
-      "price": product["price"],
-      // "token": "d41d8cd98f00b204e9800998ecf8427e"
-    }
+    var addCartDetailsURL = "https://stage.texvalleyb2b.in/api_web/add_cart.php"
+    var params = { "a_id": product.a_id, "product_id": product.productID, "quantity": product.quantity, "price": product["price"]}
     var paramsdata = Object.assign(params, JSON.parse(localStorage.getItem("LoginDetails")))
-    return this.http.post<any>("https://stage.texvalleyb2b.in/api_web/add_cart.php", JSON.stringify(paramsdata)).pipe(map(data => {
+    return this.http.post<any>(addCartDetailsURL, JSON.stringify(paramsdata)).pipe(map(data => {
       return data
     })).subscribe((res) => {
       if (res.length > 0 && res[0]["status"].indexOf("Success") > -1)
-        // alert(res[0]["status"]);
         this.toastrService.success('Successfully added your item to cart..');
     })
   }
 
   public getProductDetails(pId: string) {
+    var productDetailsURL = "https://stage.texvalleyb2b.in/api_web/get_product_details.php";
 
     var params = Object.assign({
       "product_id": pId,
     }, JSON.parse(localStorage.getItem("LoginDetails")))
-    return this.http.post<any>("https://stage.texvalleyb2b.in/api_web/get_product_details.php", JSON.stringify(params)).pipe(map(data => {
+    return this.http.post<any>(productDetailsURL, JSON.stringify(params)).pipe(map(data => {
       for (var i = 0; i < data.length; i++)
         data[i]["size"] = data[i]["attributes"][0]["a_value"];
       return data
@@ -118,18 +113,28 @@ export class ProductService {
   public getOrderDetails() {
 
     var params = JSON.parse(localStorage.getItem("LoginDetails"))
-    var url = "https://stage.texvalleyb2b.in/api_web/get_order.php";
-    return this.http.post<any>(url, JSON.stringify(params));
+    var getOrderDetailsURL = "https://stage.texvalleyb2b.in/api_web/get_order.php";
+    return this.http.post<any>(getOrderDetailsURL, JSON.stringify(params));
   }
 
   public getOrderCollectionDetail(orderId) {
 
     var params = JSON.parse(localStorage.getItem("LoginDetails"));
     params.order_id = orderId;
-    var url = "https://stage.texvalleyb2b.in/api_web/get_order_items.php";
+    var getOrderCollectionDetailUrl = "https://stage.texvalleyb2b.in/api_web/get_order_items.php";
+    return this.http.post<any>(getOrderCollectionDetailUrl, JSON.stringify(params));
+
+  }
+
+  public initiatePayement(orderId) {
+    // var params = JSON.parse(localStorage.getItem("LoginDetails"));
+    var params = { order_id : orderId}
+    var url = "https://stage.texvalleyb2b.in/api_web/initiate_payment.php";
     return this.http.post<any>(url, JSON.stringify(params));
 
   }
+
+
 
   // Get Products
   public get getProducts(): Observable<Product[]> {
@@ -224,7 +229,7 @@ export class ProductService {
     ---------------------------------------------
   */
 
-  
+
   // Get Cart Items
   public get cartItems(): Observable<Product[]> {
     const itemsStream = new Observable(observer => {
@@ -285,13 +290,13 @@ export class ProductService {
 
   // Remove Cart items
   public removeCartItem(product: Product): any {
-    
-    var deleteCartURL= "https://stage.texvalleyb2b.in/api_web/delete_cart.php";
+
+    var deleteCartURL = "https://stage.texvalleyb2b.in/api_web/delete_cart.php";
 
     var params = JSON.parse(localStorage.getItem("LoginDetails"))
     params.cart_id = product["cart_id"];
     return this.http.post<any>(deleteCartURL, JSON.stringify(params))
-    
+
     // const index = state.cart.indexOf(product);
     // state.cart.splice(index, 1);
     // // localStorage.setItem("cartItems", JSON.stringify(state.cart));
@@ -299,10 +304,10 @@ export class ProductService {
   }
 
   // Total amount 
-  public convertToProduct(response: any){
-    var productList=[];
-    var priceSum=0;
-    for(var i=0; i< response.length;i++){
+  public convertToProduct(response: any) {
+    var productList = [];
+    var priceSum = 0;
+    for (var i = 0; i < response.length; i++) {
       this.templateProduct.title = response[i].product_name;
       response[i]["size"] = response[i].Size_Range;
       productList.push(Object.assign({}, this.templateProduct, response[i]))
@@ -335,26 +340,26 @@ export class ProductService {
   }
 
   public applyCouponCode(code) {
-    
+
     var params = JSON.parse(localStorage.getItem("LoginDetails"))
     params.coupon_code = code;
     var url = "https://stage.texvalleyb2b.in/api_web/update_coupon.php";
     return this.http.post<any>(url, JSON.stringify(params))
   }
-  
+
 
   getProfile() {
     var params = JSON.parse(localStorage.getItem("LoginDetails"))
     var url = " https://stage.texvalleyb2b.in/api_web/get_profile.php";
     return this.http.post<any>(url, JSON.stringify(params));
-    
+
   }
   updateKYC(params) {
-    var kycURL ="https://stage.texvalleyb2b.in/api_web/send_kyc_update.php";
+    var kycURL = "https://stage.texvalleyb2b.in/api_web/send_kyc_update.php";
     return this.http.post<any>(kycURL, JSON.stringify(params));
   }
 
-  updateProfile(formData:string) {
+  updateProfile(formData: string) {
     var params = JSON.parse(localStorage.getItem("LoginDetails"))
     var url = "https://stage.texvalleyb2b.in/api_web/send_update_profile.php";
     return this.http.post<any>(url, formData)
@@ -383,23 +388,22 @@ export class ProductService {
       })
     ));
   }
-  public filterProductCollection(filter: any, prodCollection:any): Observable<any[]> {
+  public filterProductCollection(filter: any, prodCollection: any): Observable<any[]> {
     return prodCollection.filter((item: Product) => {
-        if (!filter.length)
-         return true
-        const Tags = filter.some((prev) => { // Match Tags
-          if (item.tags) {
-            // if (item.tags.includes(prev)) 
-            if(filter.indexOf(item.brand)>-1)
-            {
-              return item.brand;
-            }
+      if (!filter.length)
+        return true
+      const Tags = filter.some((prev) => { // Match Tags
+        if (item.tags) {
+          // if (item.tags.includes(prev)) 
+          if (filter.indexOf(item.brand) > -1) {
+            return item.brand;
           }
-        })
-        
-        return Tags
+        }
       })
-    
+
+      return Tags
+    })
+
   }
 
   // Sorting Filter
@@ -434,8 +438,8 @@ export class ProductService {
       })
     } else if (payload === 'low') {
       return products.sort((a, b) => {
-       var aPrice = parseFloat(a.price.toString())
-       var bPrice = parseFloat(b.price.toString())
+        var aPrice = parseFloat(a.price.toString())
+        var bPrice = parseFloat(b.price.toString())
         if (aPrice < bPrice) {
           return -1;
         } else if (aPrice > bPrice) {
@@ -449,7 +453,7 @@ export class ProductService {
         var aPrice = parseFloat(a.price.toString())
         var bPrice = parseFloat(b.price.toString())
         // console.log("A:"+a.price +"B:" + b.price)
-        if (aPrice> bPrice) {
+        if (aPrice > bPrice) {
           return -1;
         } else if (aPrice < bPrice) {
           return 1;

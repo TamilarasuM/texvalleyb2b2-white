@@ -37,6 +37,7 @@
     "@ngx-loading-bar/router": "^4.2.0",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
+    "angular2-counto": "^1.2.5",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.5.3",
     "cors": "^2.8.5",

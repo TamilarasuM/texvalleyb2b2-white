@@ -88,7 +88,7 @@
                             <td>
                                 <ng-container *ngIf="order.payment_status==0">
                                     <a class="btn btn-success" style="color: white;"
-                                        href="https://stage.ostaapp.com/paymentGateway/">Pay Now</a>
+                                        (click)="payDetails(order.order_id)">Pay Now</a>
                                 </ng-container>
                                 <ng-container *ngIf="order.payment_status==1">
                                     <a class="btn btn-success" style="color: white;">Paid</a>

@@ -8,6 +8,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { BarRatingModule } from "ngx-bar-rating";
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { CountoModule } from '../pages/countTo/counto.module2';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 // Layout Box
@@ -78,6 +79,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
   ],
   imports: [
     CommonModule,
+    CountoModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -92,6 +94,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
   ],
   exports: [
     CommonModule,
+    CountoModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,

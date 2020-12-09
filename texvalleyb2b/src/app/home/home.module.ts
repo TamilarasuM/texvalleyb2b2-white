@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CountoModule } from 'angular2-counto';
+// import { CounterDirective } from '../pages/countTo/counto.directive';
 import { SharedModule } from '../shared/shared.module';
 import { FashionOneComponent } from './fashion/fashion-one/fashion-one.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -15,9 +17,10 @@ import { SliderComponent } from './widgets/slider/slider.component';
 
 
 @NgModule({
+  
   declarations: [
     FashionOneComponent,
-
+    // CounterDirective,
  
     // Widgest Components
     SliderComponent,
@@ -29,8 +32,10 @@ import { SliderComponent } from './widgets/slider/slider.component';
   ],
   imports: [
     CommonModule,
+    CountoModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+
   ]
 })
 export class HomeModule { }

@@ -41,7 +41,7 @@
         <!-- External Link -->
         <!-- [ngClass]="{'text-success': menuItem.removePadding }" -->
 
-        <a href="{{ menuItem.path }}" class="nav-link" *ngIf="menuItem.type === 'extLink'"   [ngStyle]="{'padding-right':menuItem.removePadding ? '20px' : '45px' }">
+        <a [routerLink]="menuItem.path" routerLinkActive="active" class="nav-link" *ngIf="menuItem.type === 'extLink'"   [ngStyle]="{'padding-right':menuItem.removePadding ? '20px' : '45px' }">
           {{ menuItem.title }}
           <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
           <span class="sub-arrow" *ngIf="menuItem.children"></span>
@@ -81,13 +81,13 @@
             <span class="sub-arrow" *ngIf="childrenItem.children"></span>
           </a>
             <!-- External Link -->
-            <a href="{{ childrenItem.path }}"
+            <a [routerLink]='[childrenItem.path]'
               *ngIf="childrenItem.type === 'extLink' ">
               {{ childrenItem.title | translate }}
               <span class="new-tag" *ngIf="childrenItem.badge">{{ childrenItem.badgeText | translate }}</span>
               <span class="sub-arrow" *ngIf="childrenItem.children"></span>
             </a>
-            <a href="{{ childrenItem.path }}"
+            <a [routerLink]='[childrenItem.path]'
             *ngIf="childrenItem.type === 'logout' " (click)="logout()">
             {{ childrenItem.title | translate }}
             <span class="new-tag" *ngIf="childrenItem.badge">{{ childrenItem.badgeText | translate }}</span>

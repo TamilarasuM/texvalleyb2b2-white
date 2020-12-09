@@ -234,7 +234,8 @@ export let ProductDetailsMainSlider: any = {
     dots:false,
     autoplay: false,
     slideSpeed: 300,
-    loop: true
+    loop: true,
+    autoHeight:true
 }
 
 // Product Details Thumb Slider
@@ -242,5 +243,6 @@ export let ProductDetailsThumbSlider: any = {
     items: 3,
     loop: true,
     margin: 10,
-    dots:false
+    dots:false,
+    autoHeight:true
 }

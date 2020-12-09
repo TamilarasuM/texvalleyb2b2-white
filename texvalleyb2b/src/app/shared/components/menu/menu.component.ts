@@ -45,6 +45,15 @@ export class MenuComponent implements OnInit {
   }
   logout(){
     localStorage.removeItem("LoginDetails");
+    this.navServices.items.subscribe(menuItems => {
+      if(menuItems.length>0){
+        menuItems =  menuItems.filter( function(args) {  
+          if(!(args.title.indexOf("My Account")>-1 || args.title.indexOf("Login")>-1 || args.title.indexOf("Buyer Benifits")>-1 || args.title.indexOf("Why Texvalley B2B")>-1))
+          return args;
+        } )
+        this.menuItems = this.navServices.updateMenus(menuItems);
+      }
+      })
     this.productSvc.cartDetails.next([]);
     this.router.navigate(['/home/fashion']);
   }
