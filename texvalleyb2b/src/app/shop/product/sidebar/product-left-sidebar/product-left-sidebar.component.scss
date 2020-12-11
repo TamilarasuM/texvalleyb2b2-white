@@ -9,3 +9,10 @@
 .product-slick.sub {
     width: 60%;
 }
+
+@media (max-width: 991px) {
+    .product-right .border-product table,  {
+    text-align: left;
+    }
+
+}

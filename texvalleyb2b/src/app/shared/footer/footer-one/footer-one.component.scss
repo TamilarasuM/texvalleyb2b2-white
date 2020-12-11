@@ -2,3 +2,17 @@
     display: inline-block;
     padding-right: 15px;
 }
+
+
+@media (max-width: 767px) {
+.footer-theme .sub-title li {
+    padding-top: 7px;
+    text-align: center;
+}
+.footer-title , .footer-contant {
+    text-align: center;
+}
+.footer-social {
+    justify-content: center;
+}
+}

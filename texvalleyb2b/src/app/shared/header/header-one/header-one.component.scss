@@ -247,13 +247,16 @@
     flex-flow: column-reverse;
     margin-bottom: 15px;
 }
-.mobile-wishlist{
-  display: none;
-}
+// .mobile-wishlist{
+//   display: none;
+// }
 .header-1r-optoions {
   margin-top: 10px;
 }
 }
+// .mobile-fix-option, .mobile-cart.cart-customized {
+//   display: none;
+// }
 
 .header-1r-optoions a{
     // color: white;
@@ -265,5 +268,9 @@
 }
 .header-1r-optoions a i {
 padding-right:5px
+}
+
+.brand-logo .img-fluid{
+  height: 5.7em;
 }
 

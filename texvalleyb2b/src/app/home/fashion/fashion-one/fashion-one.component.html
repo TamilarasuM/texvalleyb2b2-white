@@ -29,9 +29,9 @@
         <div   class="count-type">Product Shipments</div>
       </div>
       <div   class="one-fourth counter col-sm-12 col-lg-4">
-        <span counto  class="timer1" [step]="100" [countTo]="8861637" [countFrom]="0" [duration]="3" (countoChange)="counto3value = $event" (countoEnd)="onCountoEnd()">{{counto3value | number:'1.0-0'}}</span>
+        <span counto  class="timer1" [step]="100" [countTo]="8861637" [countFrom]="0" [duration]="3" (countoChange)="counto3value = $event" (countoEnd)="onCountoEnd()">{{counto3value | currency: 'INR':'symbol':'1.0-0'}}</span>
         <!-- <span            data-from="0" data-to="15" data-speed="3000" class="timer1">8861637</span> -->
-        <div   class="count-type">Buyer Savings</div>
+        <div   class="count-type">Buyer Earnings</div>
       </div>
     </div>
   </div>
@@ -47,8 +47,8 @@
             <img [src]="collection.image" class="img-fluid" alt="collection-banner">
             <div class="contain-banner">
               <div>
-                <h4>{{collection.save}}</h4>
-                <h3>{{collection.title}}</h3>
+                <!-- <h4>{{collection.save}}</h4>
+                <h3>{{collection.title}}</h3> -->
               </div>
             </div>
           </div>

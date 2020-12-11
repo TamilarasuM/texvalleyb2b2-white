@@ -35,12 +35,12 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="username">Mobile</label>
-                            <input type="number" class="form-control" id="mobile_no" formControlName="mobile_no"
+                            <input type="number" class="form-control" id="mobile_number" formControlName="mobile_number"
                                 placeholder="Mobile">
                             <div class="help-block"
-                                *ngIf="!SignupForm.get('mobile_no').valid&&SignupForm.get('mobile_no').touched">
-                                <span style="color: red;" *ngIf="SignupForm.get('mobile_no').errors['required']">Mobile number required</span>
-                                    <span style="color: red;" *ngIf="SignupForm.get('mobile_no').errors['pattern']">Enter 10 digit Mobile Number</span>
+                                *ngIf="!SignupForm.get('mobile_number').valid&&SignupForm.get('mobile_number').touched">
+                                <span style="color: red;" *ngIf="SignupForm.get('mobile_number').errors['required']">Mobile number required</span>
+                                    <span style="color: red;" *ngIf="SignupForm.get('mobile_number').errors['pattern']">Enter 10 digit Mobile Number</span>
                             </div>
                         </div>
 
@@ -117,12 +117,12 @@
                         </div>
                         <div class="col-md-6">
                             <label for="username">Shipping Address</label>
-                            <textarea type="textArea" class="form-control" id="saddress" formControlName="shippingaddress"
+                            <textarea type="textArea" class="form-control" id="saddress" formControlName="shipping_address"
                                 placeholder="Shipping address"></textarea>
                             <div class="help-block"
-                                *ngIf="!SignupForm.get('shippingaddress').valid&&SignupForm.get('shippingaddress').touched">
+                                *ngIf="!SignupForm.get('shipping_address').valid&&SignupForm.get('shipping_address').touched">
                                 <span style="color: red;"
-                                    *ngIf="SignupForm.get('shippingaddress').errors['required']">Shipping Address is
+                                    *ngIf="SignupForm.get('shipping_address').errors['required']">Shipping Address is
                                     required</span>
                              </div>
                         </div>

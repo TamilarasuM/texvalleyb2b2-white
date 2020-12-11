@@ -176,6 +176,11 @@ export class ForgetPasswordComponent implements OnInit {
         
         if(res !=null && res[0] !=null ) {
           this.tst.success(res[0].status)
+          debugger
+          var userDetails = JSON.parse(localStorage.getItem("LoginDetails"));
+          userDetails["verified"] = res[0].verified;
+          localStorage.setItem("LoginDetails", JSON.stringify(userDetails));
+
           setTimeout((function (args) {
           this.router.navigate(['/home/fashion']);
           }).bind(this), 2500)

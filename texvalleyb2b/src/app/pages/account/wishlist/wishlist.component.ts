@@ -38,17 +38,15 @@ export class WishlistComponent implements OnInit {
   }
 
   public payDetails(orderID) {
-    debugger
     this.productDetails.initiatePayement(orderID).subscribe((function (res) {
       // this.orderCollection = res;
-     debugger
      if(res.status ==0)
       this.tost.error(res.message)
      else {
-       var routeUrl =  "https://www.uat.ostaapp.com/paymentGateway/?ostaTransactionReferenceId=&token=";
-      this.router.navigate(['/home/fashion']);
+       var payemntGateWayUrl =  "https://uat.ostaapp.com/paymentGateway/?ostaTransactionReferenceId="+res.ostaTransactionReferenceId+"&token="+res.token;
+      // this.router.navigateByUrl(routeUrl);
+      window.location.href = payemntGateWayUrl;
      }
-      debugger
     }).bind(this))
 
   }

@@ -11,7 +11,6 @@ import { ProductService } from "../../shared/services/product.service";
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-
   SignupForm: FormGroup;
   public isShippingDetails = false;
   public products: Product[] = [];
@@ -21,11 +20,9 @@ export class CartComponent implements OnInit {
   public couponAmt =0;
   public couponCode ="";
   public removedCartId = "";
-
   public templateProduct = { "id": 1, "title": "Kids T-Shirt- Sivam", "description": " desc", "type": "fashion", "brand": "nike", "collection": ["new products"], "category": "Women", "price": "550.00", "sale": true, "stock": 5, "new": true, "tags": ["new", "s", "m", "yellow", "white", "pink", "nike"], "variants": [{ "variant_id": 101, "id": 1, "sku": "sku1", "size": "S", "color": "#ff0000", "image_id": 111 }], "images": [{ "image_id": 111, "id": 1, "alt": "yellow", "src": "//stage.texvalleyb2b.in/undefined", "variant_id": [101, 104] }], "quantity": 3 }
 
   constructor(public productService: ProductService, private router: Router, private tst:ToastrService) {
-    // this.productService.cartItems.subscribe(response => this.products = );
   }
 
   ngOnInit(): void {
@@ -43,25 +40,18 @@ export class CartComponent implements OnInit {
       if (response.length) {
         this.products = this.convertToProduct(response);
         this.productService.cartDetails.next(this.products);
-        // localStorage.removeItem("cartItems")
-        // localStorage.setItem("cartItems", JSON.stringify(this.products))
+        this.getOrderTotal;
         if (this.products.length > 0) {
           this.isShippingDetails = true;
           this.SignupForm.setValue({
             address: this.products[0]["shipping_address"],
             city: this.products[0]["city"],
-            company_name: "Company test",
+            company_name: this.products[0]["company_name"],
             email_id: this.products[0]["email_id"],
             mobile_no: this.products[0]["mobile_no"],
             pincode: this.products[0]["pin_code"]
           })
         }
-        // this.shippingDetails["name"]=this.products[0]["company_name"];
-        // this.shippingDetails["phone"]=this.products[0]["mobile_no"];
-        // this.shippingDetails["email"]=this.products[0]["email_id"];
-        // this.shippingDetails["shipping_address"]=this.products[0]["shipping_address"];
-        // this.shippingDetails["city"]=this.products[0]["city"];
-        // this.shippingDetails["pincode"]=this.products[0]["pin_code"];
       }
     });
   }
@@ -70,18 +60,17 @@ export class CartComponent implements OnInit {
     var productList = [];
     this.totalTax =0;
     var priceSum = 0;
-    
     for (var i = 0; i < response.length; i++) {
       this.couponCode = response[0].coupon_code;
       this.couponAmt =  parseInt(response[i].coupon_amount);
       this.templateProduct.title = response[i].product_name;
-      response[i]["size"] = response[i].Size_Range;
+      debugger
+      response[i]["size"] = response[i].size;
       productList.push(Object.assign({}, this.templateProduct, response[i]))
       this.totalTax = this.totalTax + parseInt(response[i].total_tax);
       priceSum = priceSum + parseInt(response[i].total);
     }
     this.totalAmt = priceSum + this.totalTax  +  this.couponAmt; 
-
     return productList;
   }
 
@@ -89,8 +78,10 @@ export class CartComponent implements OnInit {
     
     this.productService.applyCouponCode(code).subscribe( (function (res) { 
       
-      if(res[0].status != 1)
-      this.tst.error(res[0].message)
+      if(res[0].status != 1) {
+        this.tst.error(res[0].message)
+        this.couponAmt = 0
+      }
       else {
         this.tst.success(res[0].message)
         this.couponAmt = res[0].amount;
@@ -102,7 +93,7 @@ export class CartComponent implements OnInit {
   }
 
   public confirmOrder() {
-    this.productService.confirmOrders().subscribe((res) => {
+    this.productService.confirmOrders(this.SignupForm.value).subscribe((res) => {
       this.router.navigate(['/order/success', res[0]["order_no"]])
       this.productService.cartDetails.next([]);
     })
@@ -110,12 +101,15 @@ export class CartComponent implements OnInit {
   }
   public get getTotal() {
     var total = 0;
+    var totalTax=0;
     for (var i = 0; i < this.products.length; i++) {
       total = total + parseInt(this.products[i]["total"]);
+      totalTax = totalTax + parseInt(this.products[i]["total_tax"]);
     }
-
+    this.totalTax = totalTax;
     return total; //this.productService.cartTotalAmount();
   }
+
 
   // Increament
   increment(product, qty = 1) {
@@ -127,7 +121,12 @@ export class CartComponent implements OnInit {
     this.productService.updateCartQuantity(product, qty);
   }
 
+  public get getOrderTotal() {
+    return  this.couponAmt + this.totalTax + this.getTotal;
+  }
+
   public removeItem(product: any) {
+    debugger
     this.removedCartId = product.cart_id;
     this.productService.removeCartItem(product).subscribe((function (response) {
       if (response.length > 0 && response[0].status.indexOf("Success") > -1) {

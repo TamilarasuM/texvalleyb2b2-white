@@ -18,10 +18,10 @@ export class ProfileComponent implements OnInit {
     this.SignupForm = new FormGroup({
       'buyer_name': new FormControl(null, [Validators.required]),
       'company_name': new FormControl(null, [Validators.required]),
-      'mobile_no': new FormControl(null, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+      'mobile_number': new FormControl(null, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       'email_id': new FormControl(null, [Validators.required, Validators.email]),
       'address': new FormControl(null, [Validators.required]),
-      'shippingaddress': new FormControl(null, [Validators.required]),
+      'shipping_address': new FormControl(null, [Validators.required]),
       // 'gst_no': new FormControl(null, [Validators.required]),
       'city': new FormControl([], [Validators.required]),
       'state': new FormControl([], [Validators.required]),
@@ -34,11 +34,11 @@ export class ProfileComponent implements OnInit {
           this.SignupForm.patchValue(
           {
             address: res[0].address,
-            shippingaddress: res[0].shipping_address,
+            shipping_address: res[0].shipping_address,
             buyer_name: res[0].contact_name,
             company_name: res[0].company_name,
             email_id: res[0].email_id,
-            mobile_no: res[0].mobile_no,
+            mobile_number: res[0].mobile_no,
             pincode: res[0].pin_code,
             city: res[0].city,
             state: res[0].state,
@@ -51,7 +51,10 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     if (this.SignupForm.valid) {
-      this.productService.updateProfile( JSON.stringify(this.SignupForm.value)).subscribe(
+      var userDetails = JSON.parse(localStorage.getItem("LoginDetails"));
+         var profileData =   Object.assign(userDetails,this.SignupForm.value) ;
+         debugger
+      this.productService.updateProfile( JSON.stringify(profileData)).subscribe(
           res => {
             // if (!(res["status"].indexOf("already Registered") > -1)) {
             // }

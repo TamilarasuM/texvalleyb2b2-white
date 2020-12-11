@@ -3,7 +3,7 @@
 <section class="cart-section">
     <div class="container">
         <div class="col-sm-12 empty-cart-cls text-center" *ngIf="!products.length">
-            <img src="assets/images/icon-empty-cart1.png" class="img-fluid mb-4">
+            <img src="assets/images/icon-empty-cart.png" class="img-fluid mb-4">
             <h3><strong>Your Cart is Empty</strong></h3>
             <h4>Add something to make me happy :)</h4>
         </div>
@@ -20,8 +20,8 @@
                             <th scope="col">QTY</th>
                             <th scope="col">GST%</th>
                             <th scope="col">price</th>
+                            <th scope="col">total</th>
                             <th scope="col">action</th>
-                            <!-- <th scope="col">total</th> -->
                         </tr>
                     </thead>
                     <tbody *ngFor="let product of products">
@@ -94,25 +94,16 @@
                                 <!-- {{ (product.price | discount:product) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }} -->
                             </td>
                             <td>
+                               {{product.total}}
+                            </td>
+                            <td>
                                 <h2 class="td-color">
                                     <a (click)="removeItem(product)" class="icon">
                                         <i class="ti-close"></i>
                                     </a>
                                 </h2>
                             </td>
-                            <!-- <td> -->
-                            <!-- <span class="cartView">
-                                <button class="btn btn-success" (click)="confirmOrder()">Confirm Order</button> 
-                            </span> -->
-                            <!-- <a href="javascript:void(0)" (click)="removeItem(product)" class="icon">
-                            <i class="ti-close"></i>  </a> -->
-                            <!-- </td> -->
-                            <!-- <td>
-                            <h2 class="td-color">
-                                {{ product.price | currency:"INR"}} 
-                               {{ ((product.price | discount:product) * product.quantity) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
-                            </h2>
-                        </td> -->
+                
                         </tr>
                     </tbody>
                 </table>
@@ -286,23 +277,10 @@
                                     <li style="color: #ff4c3b;margin-top: -10px;"
                                         (click)="applyCouponCode(couponcode.value)">Apply Coupon</li>
                                 </ul>
-                                <!-- <ul class="sub-total">
-                      <li>Subtotal <span class="count">$380.10</span></li>
-                      <li>Shipping <div class="shipping">
-                        <div class="shopping-option">
-                          <input type="checkbox" name="free-shipping" id="free-shipping">
-                          <label for="free-shipping">Free Shipping</label>
-                        </div>
-                        <div class="shopping-option">
-                          <input type="checkbox" name="local-pickup" id="local-pickup">
-                          <label for="local-pickup">Local Pickup</label>
-                        </div>
-                      </div>
-                      </li>
-                    </ul> -->
+                            
 
                                 <ul class="total">
-                                    <li>Amount Payable <span class="count">{{totalAmt | currency:"INR"}}</span></li>
+                                    <li>Amount Payable <span class="count">{{getOrderTotal | currency:"INR"}}</span></li>
                                 </ul>
                             </div>
 

@@ -45,10 +45,11 @@ export class ProductLeftSidebarComponent implements OnInit {
       debugger
       var data = Object.assign({}, this.productService.templateJSON, res[0]);
       this.productAttributes = res[0].attribute_details;
-      this.productService.templateJSON["price"] = data.cost;
+      this.productService.templateJSON["price"] = data.p_cost;
       this.productService.templateJSON["title"] = data.product_name;
       this.productService.templateJSON["tv_code"] = data.tv_code;
       this.productService.templateJSON["UOM"] = data.UOM;
+      this.productService.templateJSON["moq"] = data.moq;
       this.productService.templateJSON["Minimum_Pack_Qty"] = data.Minimum_Pack_Qty;
       this.productService.templateJSON["Minimum_Order_QTY"] = data.min_order;
       this.productService.templateJSON["Dimensions"] = data.Dimensions;
@@ -61,6 +62,7 @@ export class ProductLeftSidebarComponent implements OnInit {
       this.productService.templateJSON["product_info"] = data.product_info;
 
       this.productService.templateJSON["brand"] = data.brand;
+      debugger
       this.a_id = res[0].a_id
       this.selectedSize = res[0].size;
       this.sizeCost = parseInt(res[0].cost);
@@ -71,7 +73,7 @@ export class ProductLeftSidebarComponent implements OnInit {
       this.productService.templateJSON.variants = [];
       for (var i = 0; i < res.length; i++) {
         debugger
-        var template = { "variant_id": 101, "id": 1, "sku": "sku1", a_id: res["a_id"], price : res[i].cost, "size": res[i].size, "color": data.color, "image_id": 111 }
+        var template = { "variant_id": 101, "id": 1, "sku": "sku1", a_id: res[i]["a_id"], price : res[i].cost, "size": res[i].size, "color": data.color, "image_id": 111 }
         this.productService.templateJSON.variants.push(template);
         // this.productService.templateJSON.variants[i].size = res[i].size;
         // this.productService.templateJSON.variants[i].color = data.color;
@@ -85,13 +87,12 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   // Get Product Color
   Color(variants) {
-    debugger
     const uniqColor = []
     for (let i = 0; i < Object.keys(variants).length; i++) {
       if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
         uniqColor.push(variants[i].color)
       }
-      if (this.selectSize == variants[i].size)
+      if (this.selectedSize == variants[i].size)
         this.a_id = variants[i].a_id;
     }
     return uniqColor
@@ -99,22 +100,20 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   // Get Product Size
   Size(variants) {
-    debugger
     const uniqSize = []
     for (let i = 0; i < Object.keys(variants).length; i++) {
       if (uniqSize.indexOf(variants[i].size) === -1 && variants[i].size) {
         uniqSize.push(variants[i].size)
       }
-      if (this.selectSize == variants[i].size){
+      if (this.selectedSize == variants[i].size){
         this.a_id = variants[i].a_id;
-        this.sizeCost = parseInt(variants[i].cost);
+        this.sizeCost = parseInt(variants[i].price);
       }
     }
     return uniqSize
   }
 
   selectSize(size) {
-    debugger
     this.selectedSize = size;
   }
 
@@ -135,15 +134,18 @@ export class ProductLeftSidebarComponent implements OnInit {
   getTotalOrderValue() {
     return (this.counter * this.sizeCost)
   }
+  getOrderQty() {
+    return (this.counter * this.productService.templateJSON["moq"])
+  }
 
   // Add to cart
   async addToCart(product: any) {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
-    var productDetails = { price: product["price"], quantity: product.quantity, productID: this.productID, a_id: this.a_id }
+    const productDetails = { price: this.sizeCost, quantity: product.quantity, productID: this.productID, a_id: this.a_id }
 
     if (localStorage.getItem("LoginDetails") == null) {
-      this.tost.error("user not loagged in, navigating to login page..")
+      this.tost.error("Please login..")
       this.router.navigate(['/login']);
     }
     else {

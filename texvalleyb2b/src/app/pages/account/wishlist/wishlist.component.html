@@ -67,6 +67,7 @@
                             <th scope="col">Order ID</th>
                             <th scope="col">Status</th>
                             <th scope="col">Total Amount</th>
+                            <th scope="col">Items</th>
                             <th scope="col">Payment</th>
                         </tr>
                     </thead>
@@ -75,7 +76,7 @@
                             <td>
                                 {{ order.order_date | date: 'dd/MM/yyyy' }}
                             </td>
-                            <td (click)="getDetails(order.order_id)">
+                            <td >
                                 {{ order.order_no }}
                             </td>
                             <td>
@@ -84,6 +85,9 @@
 
                             <td>
                                 {{order.total}}
+                            </td>
+                            <td (click)="getDetails(order.order_id)" style="cursor: pointer;" >
+                                View Items
                             </td>
                             <td>
                                 <ng-container *ngIf="order.payment_status==0">

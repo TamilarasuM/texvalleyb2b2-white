@@ -69,10 +69,12 @@
                       <span>{{ product?.discount }}% off</span>
                   </h4> -->
                   <h4>
-                    <b>{{ product?.price | discount:product}}</b>
+                    <b>{{ product?.price | discount:product}} </b>
                     <!-- {{ (product?.price | discount:product) * productService.Currency?.price | currency: productService.Currency?.currency:'symbol' }} -->
                   </h4>
-                  <li><b>Brand:</b> {{ product['brand'] }}</li>
+                  <div><b>Brand:</b> {{ product['brand'] }}</div>
+                  <div><b>UOM:</b> {{ product['UOM'] }}</div>
+                  <div><b>MOQ:</b> {{ product['moq'] }}</div>
                   <ul class="color-variant" *ngIf="Color(product?.variants).length">
                     <li [class]="color" [class.active]="activeSlide == i.toString()"
                       *ngFor="let color of Color(product?.variants); index as i" [ngStyle]="{'background-color': color}"
@@ -89,12 +91,7 @@
                   </ul>
                   <!-- <app-stock-inventory [stock]="product?.stock"></app-stock-inventory> -->
                   <div class="product-description border-product">
-                    <!-- <h6 class="product-title size-text" *ngIf="Size(product.variants).length">
-                        select size
-                        <span>
-                          <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size chart</a>
-                        </span>
-                    </h6> -->
+  
                     <div class="size-box" *ngIf="Size(product.variants).length">
                       <ul>
                         <li [class.active]="selectedSize == size" *ngFor="let size of Size(product.variants)">
@@ -123,9 +120,13 @@
                         </span>
                       </div>
                     </div>
-                    <div style="padding-top: 10px;"><b>Min Order Quantity:</b> {{product.Minimum_Order_QTY}}</div>
-                    <div *ngIf="!isVerifyKYC" style="padding-top: 10px;">This Order Value: {{counter}} X {{sizeCost}} = {{getTotalOrderValue()}}</div>
+                    <!-- <div style="padding-top: 10px;"><b> Order Quantity:</b> {{product.Minimum_Order_QTY}}</div> -->
+                    <div *ngIf="!isVerifyKYC" style="padding-top: 10px;">
+                      This Order Quantity: {{counter}} X {{product['moq']}} = {{getOrderQty()}} Pcs</div>
+                    <div *ngIf="!isVerifyKYC" style="padding-top: 10px;">
+                      This Order Value: {{counter}} X {{sizeCost}} = {{getTotalOrderValue()}}</div>
                   </div>
+                  
                   <div class="product-buttons">
 
                     <a style="margin-left: 0;" *ngIf="!isVerifyKYC" href="javascrip:void(0)" class="btn btn-solid"

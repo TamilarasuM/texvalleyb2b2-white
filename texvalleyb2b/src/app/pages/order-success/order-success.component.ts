@@ -16,7 +16,7 @@ export class OrderSuccessComponent implements OnInit {
 
 
     setTimeout((function(){
-      this.route.navigate(['/pages/order-details']);  
+     this.route.navigate(['/order-details']);  
    }).bind(this), 3000);
   }
   

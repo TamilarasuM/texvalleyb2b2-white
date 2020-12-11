@@ -74,7 +74,15 @@ export class FashionOneComponent implements OnInit {
     title: '',
     subTitle: '',
     image: 'assets/images/slider/2.jpg'
-  }]
+  }
+  , {
+    // title: 'welcome to fashion',
+    // subTitle: 'Women fashion',
+    title: '',
+    subTitle: '',
+    image: 'assets/images/slider/3.jpg'
+  }
+]
 
   // Collection banner
   public collections = [{
