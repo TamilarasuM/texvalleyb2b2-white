@@ -43,7 +43,10 @@ export class WishlistComponent implements OnInit {
      if(res.status ==0)
       this.tost.error(res.message)
      else {
-       var payemntGateWayUrl =  "https://uat.ostaapp.com/paymentGateway/?ostaTransactionReferenceId="+res.ostaTransactionReferenceId+"&token="+res.token;
+
+      
+       var payemntGateWayUrl =    "https://prod.ostaapp.com/paymentGateway/?ostaTransactionReferenceId="+res.ostaTransactionReferenceId+"&token="+res.token;
+      //  var payemntGateWayUrl =  "https://uat.ostaapp.com/paymentGateway/?ostaTransactionReferenceId="+res.ostaTransactionReferenceId+"&token="+res.token;
       // this.router.navigateByUrl(routeUrl);
       window.location.href = payemntGateWayUrl;
      }

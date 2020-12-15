@@ -8,7 +8,7 @@
             <h4>Add something to make me happy :)</h4>
         </div>
         <div class="row" *ngIf="products.length">
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="overflow: auto;">
                 <table class="table cart-table table-responsive-xs">
                     <thead>
                         <tr class="table-head">
@@ -34,7 +34,7 @@
                             <td>
                                 <a
                                     [routerLink]="['/shop/product/left/sidebar/', product.product_id]">{{ product.title | titlecase }}</a>
-                                <div class="mobile-cart-content row">
+                                <!-- <div class="mobile-cart-content row">
                                     <div class="col-xs-3">
                                         <div class="qty-box">
                                             <div class="input-group">
@@ -48,14 +48,8 @@
                                             {{ product.price | currency:"INR"}}
                                         </h2>
                                     </div>
-                                    <!-- <div class="col-xs-3">
-                                    <h2 class="td-color">
-                                        <a (click)="removeItem(product)" class="icon">
-                                            <i class="ti-close"></i>
-                                        </a>
-                                    </h2>
+                             
                                 </div> -->
-                                </div>
                             </td>
                             <td>
                                 {{product.tv_code}}

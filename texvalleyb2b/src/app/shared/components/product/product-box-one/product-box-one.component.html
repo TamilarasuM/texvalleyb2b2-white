@@ -25,38 +25,7 @@
       </ng-container>
 
     </div>
-    <!-- <div class="back" *ngIf="onHowerChangeImage">
-      <a [routerLink]="['/shop/product/left/sidebar/', product.product_id]">
-        <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product.images[1].alt }}">
-      </a>
-    </div> -->
-    <!-- test -->
-    <!-- <ul class="product-thumb-list" *ngIf="thumbnail">
-      <li class="grid_thumb_img" [class.active]="ImageSrc == image.src" *ngFor="let image of product.images">
-        <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image.src)">
-          <img [lazyLoad]="image.src">
-        </a>
-      </li>
-    </ul> -->
-    <!-- <div class="cart-info cart-wrap">
-      <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(product)"
-        *ngIf="cartModal">
-        <i class="ti-shopping-cart"></i>
-      </a>
-      <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(product)"
-        *ngIf="!cartModal">
-        <i class="ti-shopping-cart"></i>
-      </a>
-      <a href="javascript:void(0)" title="Add to Wishlist" (click)="addToWishlist(product)">
-        <i class="ti-heart" aria-hidden="true"></i>
-      </a>
-      <a href="javascript:void(0)" title="Quick View" (click)="QuickView.openModal()">
-        <i class="ti-search" aria-hidden="true"></i>
-      </a>
-      <a href="javascript:void(0)" title="Compare" (click)="addToCompare(product)">
-        <i class="ti-reload" aria-hidden="true"></i>
-      </a>
-    </div> -->
+   
   </div>
   <div class="product-detail">
     <div style="margin-top: -30px;">
@@ -72,14 +41,14 @@
             <h6>{{ product?.title | titlecase }}</h6>
           </a>
           <p>{{ product?.description }}</p>
-          <span><b style="color: #777676;">Code:</b>  {{ product?.tv_code }}</span>
-          <div>
-              <b style="color: #777676;">{{product?.price | discount:product }} </b>
+          <span style="font-size: 13px;"><b style="color: #777676;">Code:</b>  {{ product?.tv_code }}</span>
+          <div style="font-size: 13px;">
+              <b style="color: #777676;"><span *ngIf="isLogin && isKYCVerified"> Price / Item: Rs  </span>{{product?.price | discount:product }} </b>
             <!-- {{ product?.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }} -->
             <del *ngIf="product?.discount_cost && isLogin && isKYCVerified"><span class="money"> {{ product?.discount_cost}}</span></del>
           </div>
-          <span *ngIf="isLogin && isKYCVerified">
-            <b style="color: #777676;" >MOQ:</b>  {{product?.moq}}
+          <span style="font-size: 13px;" *ngIf="isLogin && isKYCVerified">
+            <b style="color: #777676;" >Min Order Qty:</b>  {{product?.moq}} Pcs
           </span>
         </ng-container>
       <!-- <ul class="color-variant" *ngIf="Color(product?.variants).length">

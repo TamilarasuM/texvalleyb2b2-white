@@ -9,3 +9,9 @@ div.collection-view, div.collection-grid-view, div.product-page-filter , .collec
 .product-page-filter select {
     padding: 0px !important;
 }
+
+@media (max-width: 1430px) {
+.collection-product-wrapper .product-top-filter .product-filter-content .collection-view {
+//   width: 50% !;
+}
+}

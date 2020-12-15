@@ -67,20 +67,20 @@ export class FashionOneComponent implements OnInit {
     // subTitle: 'Men fashion',
     title: '',
     subTitle: '',
-    image: 'assets/images/slider/1.jpg'
+    image: 'assets/images/slider/3.jpg'
   }, {
     // title: 'welcome to fashion',
     // subTitle: 'Women fashion',
     title: '',
     subTitle: '',
-    image: 'assets/images/slider/2.jpg'
+    image: 'assets/images/slider/1.jpg'
   }
   , {
     // title: 'welcome to fashion',
     // subTitle: 'Women fashion',
     title: '',
     subTitle: '',
-    image: 'assets/images/slider/3.jpg'
+    image: 'assets/images/slider/2.jpg'
   }
 ]
 

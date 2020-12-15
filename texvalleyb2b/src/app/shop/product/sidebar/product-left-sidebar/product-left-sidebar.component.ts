@@ -21,6 +21,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   public productAttributes = [];
   public productID;
   public isVerifyKYC = false;
+  public isLogin = false;
   public a_id;
   public loginDetails = localStorage.getItem("LoginDetails");
 
@@ -39,6 +40,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     false
+    this.isLogin = (this.loginDetails == null) ?false :true ;
     this.isVerifyKYC = (this.loginDetails == null) ? false : (JSON.parse(this.loginDetails).verified == "0" ? true : false);
     this.productID = this.route.snapshot.params["slug"];
     this.productService.getProductDetails(this.productID).subscribe((function (res) {

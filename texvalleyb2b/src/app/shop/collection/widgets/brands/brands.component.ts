@@ -34,6 +34,7 @@ export class BrandsComponent implements OnInit {
   }
 
   appliedFilter(event) {
+    debugger
     let index = this.brands.indexOf(event.target.value);  // checked and unchecked value
     if (event.target.checked)   
       this.brands.push(event.target.value); // push in array cheked value
