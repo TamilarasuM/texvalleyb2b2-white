@@ -182,6 +182,9 @@ export class ProductService {
     localStorage.setItem("compareItems", JSON.stringify(state.compare));
     return true
   }
+
+ 
+
   /*
     ---------------------------------------------
     -----------------  Cart  --------------------
@@ -251,7 +254,7 @@ export class ProductService {
     var priceSum = 0;
     for (var i = 0; i < response.length; i++) {
       this.templateProduct.title = response[i].product_name;
-      response[i]["size"] = response[i].Size_Range;
+      response[i]["size"] = response[i].size;
       productList.push(Object.assign({}, this.templateProduct, response[i]))
     }
     return productList;

@@ -46,15 +46,22 @@ export class SettingsComponent implements OnInit {
     private translate: TranslateService,
     public productService: ProductService) {
     // this.productService.cartItems.subscribe(response => this.products = response);
-    this.productService.cartDetails.subscribe( ( function (response) {
-      this.products = response
-
-    }).bind(this));
+ 
     // this.productService.
   }
 
   ngOnInit(): void {
     this.islogin = localStorage.getItem("LoginDetails") == null ? false: true;
+
+    if (this.products.length == 0 && this.islogin) {
+      this.productService.getCartDetails().subscribe((response) => {
+        if (response.length) {
+          this.products = this.productService.convertToProduct(response);
+          this.productService.cartDetails.next(this.products);
+        }
+      }
+      )
+    }
   }
 
   searchToggle(){

@@ -71,7 +71,7 @@
                     <!-- {{ (product?.price | discount:product) * productService.Currency?.price | currency: productService.Currency?.currency:'symbol' }} -->
                   </div>
                   <div><b>Min Order Quantity :</b> {{ product['moq'] }} Pcs</div>
-                  <div style=" font-size: 19px;" *ngIf="isVerifyKYC">
+                  <div style=" font-size: 19px;" *ngIf="isVerifyKYC && isLogin">
                     <b>Product Price: </b>Rs {{ sizeCost}} 
                   </div>
                   <!-- <div><b>UOM:</b> {{ product['UOM'] }}</div> -->
@@ -121,17 +121,17 @@
                       </div>
                     </div>
                     <!-- <div style="padding-top: 10px;"><b> Order Quantity:</b> {{product.Minimum_Order_QTY}}</div> -->
-                    <div *ngIf="!isVerifyKYC" style="padding-top: 10px;">
+                    <div *ngIf="isVerifyKYC && isLogin" style="padding-top: 10px;">
                       This Order Quantity: {{counter}} X {{product['moq']}} = {{getOrderQty()}} Pcs</div>
-                    <div *ngIf="!isVerifyKYC" style="padding-top: 10px;">
+                    <div *ngIf="isVerifyKYC && isLogin" style="padding-top: 10px;">
                       This Order Value: {{counter}} X {{sizeCost}} = Rs {{getTotalOrderValue()}}</div>
                   </div>
                   
                   <div class="product-buttons">
 
-                    <a style="margin-left: 0;" *ngIf="!isVerifyKYC" href="javascrip:void(0)" class="btn btn-solid"
+                    <a style="margin-left: 0;" *ngIf="isVerifyKYC" href="javascrip:void(0)" class="btn btn-solid"
                       [class.disabled]="counter > product.stock" (click)="addToCart(product)">add to cart</a>
-                    <a style="margin-left: 0;" *ngIf="isVerifyKYC" [routerLink]="['/kyc']" class="btn btn-solid"
+                    <a style="margin-left: 0;" *ngIf="!isVerifyKYC && isLogin" [routerLink]="['/kyc']" class="btn btn-solid"
                       [class.disabled]="counter > product.stock">Verify KYC</a>
                     <!-- <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="buyNow(product)">buy now</a> -->
                   </div>

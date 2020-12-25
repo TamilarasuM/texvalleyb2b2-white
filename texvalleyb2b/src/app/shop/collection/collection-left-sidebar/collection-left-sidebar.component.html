@@ -1,6 +1,6 @@
 <app-breadcrumb [title]="''" [breadcrumb]="productname"></app-breadcrumb>
 <!-- section start -->
-<section class="section-b-space">
+<section class="section-b-space" *ngIf="loader">
     <div class="collection-wrapper">
         <div class="container">
             <div class="row">
@@ -108,4 +108,9 @@
         </div>
     </div>
 </section>
+<!-- <div class="typography-box">
+    <div class="typo-content loader-typo">
+        <div class="pre-loader"></div>
+    </div>
+</div> -->
 <!-- section End -->

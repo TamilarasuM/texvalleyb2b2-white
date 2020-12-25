@@ -39,9 +39,8 @@ export class ProductLeftSidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    false
     this.isLogin = (this.loginDetails == null) ?false :true ;
-    this.isVerifyKYC = (this.loginDetails == null) ? false : (JSON.parse(this.loginDetails).verified == "0" ? true : false);
+    this.isVerifyKYC = (this.loginDetails == null) ? false : (JSON.parse(this.loginDetails).verified == "1" ? true : false);
     this.productID = this.route.snapshot.params["slug"];
     this.productService.getProductDetails(this.productID).subscribe((function (res) {
       debugger

@@ -13,24 +13,17 @@
 
 <section class="content count">
   <div  class="container">
-    <!-- <div   class="row">
-      <h2   style="margin: 0 auto;">Intensive Reach &amp; Coverage</h2>
-    </div> -->
     <div   class="row">
       <div   class="one-fourth counter col-sm-12 col-lg-4">
         <span counto  class="timer1" [step]="100" [countTo]="468" [countFrom]="0" [duration]="3" (countoChange)="countovalue = $event" (countoEnd)="onCountoEnd()">{{countovalue | number:'1.0-0'}}</span>
-        <!-- <span data-from="0" data-to="375" data-speed="3000" class="timer1">468</span> -->
         <div   class="count-type">Reseller Networks</div>
       </div>
       <div   class="one-fourth counter col-sm-12 col-lg-4">
         <span counto  class="timer1" [step]="100" [countTo]="79573" [countFrom]="0" [duration]="3" (countoChange)="counto2value = $event" (countoEnd)="onCountoEnd()">{{counto2value | number:'1.0-0'}}</span>
-        <!-- <span counto class="timer1" [step]="5625" [countTo]="79573" [countFrom]="0" [duration]="4" (countoChange)="counto2value = $event" (countoEnd)="onCountoEnd()">{{counto2value | number:'1.0-0'}}</span>  -->
-        <!-- <span   data-from="0" data-to="5625" data-speed="3000" class="timer1">79573</span> -->
         <div   class="count-type">Product Shipments</div>
       </div>
       <div   class="one-fourth counter col-sm-12 col-lg-4">
         <span counto  class="timer1" [step]="100" [countTo]="8861637" [countFrom]="0" [duration]="3" (countoChange)="counto3value = $event" (countoEnd)="onCountoEnd()">{{counto3value | currency: 'INR':'symbol':'1.0-0'}}</span>
-        <!-- <span            data-from="0" data-to="15" data-speed="3000" class="timer1">8861637</span> -->
         <div   class="count-type">Buyer Earnings</div>
       </div>
     </div>
@@ -47,8 +40,6 @@
             <img [src]="collection.image" class="img-fluid" alt="collection-banner">
             <div class="contain-banner">
               <div>
-                <!-- <h4>{{collection.save}}</h4>
-                <h3>{{collection.title}}</h3> -->
               </div>
             </div>
           </div>

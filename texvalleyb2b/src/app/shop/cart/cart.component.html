@@ -1,6 +1,6 @@
 <app-breadcrumb [title]="'Cart'" [breadcrumb]="'Cart'"></app-breadcrumb>
 <!-- section start -->
-<section class="cart-section">
+<section class="cart-section" *ngIf="!initalLoad">
     <div class="container">
         <div class="col-sm-12 empty-cart-cls text-center" *ngIf="!products.length">
             <img src="assets/images/icon-empty-cart.png" class="img-fluid mb-4">

@@ -13,6 +13,7 @@ import { ProductService } from "../../shared/services/product.service";
 export class CartComponent implements OnInit {
   SignupForm: FormGroup;
   public isShippingDetails = false;
+  public initalLoad = true;
   public products: Product[] = [];
   public shippingDetails: any;
   public totalTax = 0;
@@ -37,6 +38,7 @@ export class CartComponent implements OnInit {
     });
 
     this.productService.getCartDetails().subscribe((response) => {
+      this.initalLoad =false;
       if (response.length) {
         this.products = this.convertToProduct(response);
         this.productService.cartDetails.next(this.products);
