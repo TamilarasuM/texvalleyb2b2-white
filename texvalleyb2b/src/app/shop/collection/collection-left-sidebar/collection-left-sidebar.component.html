@@ -22,15 +22,16 @@
                             <!-- brand filter start -->
                             <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
                             </app-brands>
-                            <!-- color filter start here -->
-                            <app-colors [products]="products" [colors]="colors" (colorsFilter)="updateFilter($event)">
-                            </app-colors>
+                            <ng-container  *ngFor="let dynamicFilter of filterCollection">
+                                <app-colors [products]="products" [key]="dynamicFilter" [colors]="colors" (colorsFilter)="updateFilter($event)">
+                                </app-colors>
+                            </ng-container>
                             <!-- size filter start here -->
-                            <app-size [products]="products" [size]="size" (sizeFilter)="updateFilter($event)">
-                            </app-size>
+                            <!-- <app-size [products]="products" [size]="size" (sizeFilter)="updateFilter($event)">
+                            </app-size> -->
                             <!-- price filter start here -->
-                            <app-price [min]="minPrice" [max]="maxPrice" (priceFilter)="updateFilter($event)">
-                            </app-price>
+                            <!-- <app-price [min]="minPrice" [max]="maxPrice" (priceFilter)="updateFilter($event)">
+                            </app-price> -->
                         </div>
                         <!-- silde-bar colleps block end here -->
                         <!-- side-bar single product slider start -->

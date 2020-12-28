@@ -18,6 +18,12 @@ export class CartComponent implements OnInit {
   public shippingDetails: any;
   public totalTax = 0;
   public totalAmt = 0;
+  public availableWallet =0;
+  public walletAmt =0;
+  public useWalletAmt: boolean =false;
+  public validateOrder: boolean =false;
+  
+
   public couponAmt =0;
   public couponCode ="";
   public removedCartId = "";
@@ -64,9 +70,11 @@ export class CartComponent implements OnInit {
     var priceSum = 0;
     for (var i = 0; i < response.length; i++) {
       this.couponCode = response[0].coupon_code;
+      this.availableWallet =  response[0].available_wallet;
+      this.walletAmt = parseInt(response[0].wallet_amount);
+      this.useWalletAmt = this.walletAmt < 0;
       this.couponAmt =  parseInt(response[i].coupon_amount);
       this.templateProduct.title = response[i].product_name;
-      debugger
       response[i]["size"] = response[i].size;
       productList.push(Object.assign({}, this.templateProduct, response[i]))
       this.totalTax = this.totalTax + parseInt(response[i].total_tax);
@@ -88,6 +96,25 @@ export class CartComponent implements OnInit {
         this.tst.success(res[0].message)
         this.couponAmt = res[0].amount;
         this.totalAmt  =  this.totalAmt  +  this.couponAmt ;
+        // this.router.navigate(['/shop/cart'])
+      }
+
+    }).bind(this))
+  }
+
+  public appyWalletAmt(amt){
+    
+    this.productService.appyWalletAmt(amt).subscribe( (function (res) { 
+      if(res[0].status != 1) {
+        this.tst.error(res[0].message)
+      }
+      else {
+        this.tst.success(res[0].message)
+        this.walletAmt =  res[0]["amount"];
+        this.availableWallet = res[0]["available_wallet"];
+        
+        // this.couponAmt = res[0].amount;
+        // this.totalAmt  =  this.totalAmt  +  this.couponAmt ;
         // this.router.navigate(['/shop/cart'])
       }
 
@@ -124,7 +151,10 @@ export class CartComponent implements OnInit {
   }
 
   public get getOrderTotal() {
-    return  this.couponAmt + this.totalTax + this.getTotal;
+
+    var orderAmt = this.couponAmt + this.totalTax + this.getTotal + this.walletAmt;
+    this.validateOrder = orderAmt>= 2000;
+    return  orderAmt;
   }
 
   public removeItem(product: any) {

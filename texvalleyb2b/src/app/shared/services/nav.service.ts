@@ -190,7 +190,7 @@ export class NavService {
 		var myccMenu = this.isLogin ? [				
 			{ megaMenu: false, title: "MY Profile", path: '/profile', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
 			{ megaMenu: false, title: "MY cart", path: '/shop/cart', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
-			{ megaMenu: false, title: "MY Orders", path: '/order-details', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
+			{ megaMenu: false, title: "MY Orders", path: '/myorders', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
 			{ megaMenu: false, title: "MY KYC", path: '/kyc', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
 			{ megaMenu: false, title: "Logout", path: '/login', segment_ID: 2, product_name: null, type: 'logout', sort_order: 1 },
 		] :

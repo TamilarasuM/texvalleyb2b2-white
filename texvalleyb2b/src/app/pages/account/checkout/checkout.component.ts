@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ProductService } from '../../../shared/services/product.service';
 
 @Component({
   selector: 'app-checkout',
@@ -7,7 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,private router: Router, private prodSVC:ProductService, private toast:ToastrService) { 
+    this.route.queryParams.subscribe(params => {
+      this.prodSVC.updatedTranStatus(params).subscribe( (res)=>{
+        debugger
+        if(res.status == 0)
+            this.toast.error(res.message)
+        else
+          this.toast.success(res.message);
+
+          this.router.navigate(['/myorders']);
+      } )
+    });
+  }
 
   ngOnInit(): void {
   }

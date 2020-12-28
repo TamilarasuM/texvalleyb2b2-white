@@ -260,16 +260,27 @@
                             <div class="order-box">
                                 <div class="title-box">
                                     <div>Order Details <span> </span></div>
+                                    <div style="font-size: 15px; padding-top: 20px;">Available Wallet balance <span>{{availableWallet}}</span> </div>
                                 </div>
                                 <ul class="qty">
                                     <!-- <li *ngFor="let product of products">{{product.title}} × {{product.quantity}} <span> {{product.total}}</span></li> -->
                                     <li>Total <span>{{getTotal | number : '1.2-2'}}</span></li>
+                                   
                                     <li>Total tax (GST)<span>{{totalTax  | number : '1.2-2'}}</span></li>
                                     <li>Shipping Charge<span>{{ 0 | number : '1.2-2'}}</span></li>
                                     <li>Coupon amount <span>{{couponAmt | number : '1.2-2'}}</span></li>
                                     <li><input #couponcode [value]="couponCode" /> </li>
                                     <li style="color: #ff4c3b;margin-top: -10px;"
                                         (click)="applyCouponCode(couponcode.value)">Apply Coupon</li>
+                                    
+                                       
+                                    <li class="custom-control custom-checkbox collection-filter-checkbox ng-star-inserted" style="color: #ff4c3b;margin-top: -10px;">
+                                        <input type="checkbox" [value]="availableWallet" [checked]="useWalletAmt" (click)="appyWalletAmt(availableWallet)" id="WalletAmount" class="custom-control-input" />
+                                        <label class="custom-control-label" for="WalletAmount">Use Wallet Balance</label>
+                                        <!-- (change)="appliedFilter($event)" -->
+                                        <span>{{walletAmt | number : '1.2-2'}}</span>
+                                    </li>
+                                        
                                 </ul>
                             
 
@@ -280,7 +291,8 @@
 
 
                             <div class="text-right">
-                                <a (click)="confirmOrder()" class="btn-solid btn">Place Order</a>
+                                <a *ngIf="validateOrder" (click)="confirmOrder()" class="btn-solid btn">Place Order</a>
+                                <span *ngIf="!validateOrder" style="color: #ff4c3b;"> <b>Order value should be greater than RS 2000</b>  </span>
                             </div>
                         </div>
                     </div>

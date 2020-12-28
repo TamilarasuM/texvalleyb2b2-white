@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Product } from '../classes/product';
 import { NavService } from './nav.service';
 import { ProductService } from './product.service';
@@ -11,7 +11,7 @@ import { ProductService } from './product.service';
 export class Resolver implements Resolve<Product> {
   
   public product: Product = {};
-  public dataList = new BehaviorSubject([]);
+  public dataList = new ReplaySubject(1);
   public currentProduct = new BehaviorSubject("");
   public segmenetName = "Segmenets"
   constructor(

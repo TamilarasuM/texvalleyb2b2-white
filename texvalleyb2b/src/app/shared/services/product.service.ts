@@ -106,6 +106,11 @@ export class ProductService {
     var paymentInitateUrl = "https://stage.texvalleyb2b.in/api_web/initiate_payment.php";
     return this.http.post<any>(environment.applicationUrl.paymentInitateUrl, JSON.stringify(params));
   }
+  public updatedTranStatus(params) {
+    // var params = { order_id: orderId }
+    var  tranUpdateUrl = "https://stage.texvalleyb2b.in/api_web/update_payment.php";
+    return this.http.post<any>(tranUpdateUrl, JSON.stringify(params));
+  }
   // Get Products
   public get getProducts(): Observable<Product[]> {
     return this.products;
@@ -287,6 +292,11 @@ export class ProductService {
     // var couponUrl = "https://stage.texvalleyb2b.in/api_web/update_coupon.php";
     return this.http.post<any>(environment.applicationUrl.couponUrl, JSON.stringify(params))
   }
+  public appyWalletAmt(amt) {
+    var params = JSON.parse(localStorage.getItem("LoginDetails"))
+    params.wallet_amount = amt;
+    return this.http.post<any>(environment.applicationUrl.updateWalletUrl, JSON.stringify(params))
+  }
   getProfile() {
     var params = JSON.parse(localStorage.getItem("LoginDetails"))
     // var getProfileUrl = " https://stage.texvalleyb2b.in/api_web/get_profile.php";
@@ -308,6 +318,7 @@ export class ProductService {
   */
   // Get Product Filter
   public filterProducts(filter: any): Observable<Product[]> {
+    debugger
     return this.products.pipe(map(product =>
       product.filter((item: Product) => {
         if (!filter.length) return true
@@ -327,12 +338,16 @@ export class ProductService {
       if (!filter.length)
         return true
       const Tags = filter.some((prev) => { // Match Tags
-        if (item.tags) {
-          // if (item.tags.includes(prev)) 
-          if (filter.indexOf(item.brand) > -1) {
-            return item.brand;
-          }
+        var filterParams = prev.split("-");
+        if (filterParams.length>0) { 
+          return item[""+filterParams[0]+""] == filterParams[1];
         }
+        // if (item) {
+        //   // if (item.tags.includes(prev)) 
+        //   if (filter.indexOf(item.brand) > -1) {
+        //     return item.brand;
+        //   }
+        // }
       })
       return Tags
     })

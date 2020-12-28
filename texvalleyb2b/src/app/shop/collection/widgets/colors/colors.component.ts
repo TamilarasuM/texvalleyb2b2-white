@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../../../shared/classes/product';
 
 @Component({
@@ -10,6 +10,7 @@ export class ColorsComponent implements OnInit {
 
   @Input() products: Product[] = [];
   @Input() colors: any[] = [];
+  @Input() key: any[] = [];
 
   @Output() colorsFilter  : EventEmitter<any> = new EventEmitter<any>();
   
@@ -22,19 +23,20 @@ export class ColorsComponent implements OnInit {
   }
 
   get filterbycolor() {
-    const uniqueColors = []
-    this.products.filter((product) => {
-      product.variants.filter((variant) => {
-        if (variant.color) {
-          const index = uniqueColors.indexOf(variant.color)
-          if (index === -1) uniqueColors.push(variant.color)
-        }
-      })
-    })
+    const uniqueColors = [];
+    var field = this.key;
+    for(var i=0; i< this.products.length; i++){
+      if (this.products[i][''+field+'']) {
+                 const index = uniqueColors.indexOf(this.products[i][''+field+''])
+          if (index === -1) 
+             uniqueColors.push(this.products[i][''+field+''])
+      }
+    }
     return uniqueColors
   }
 
   appliedFilter(event) {
+
     let index = this.colors.indexOf(event.target.value);  // checked and unchecked value
     if (event.target.checked)   
         this.colors.push(event.target.value); // push in array cheked value
@@ -47,7 +49,7 @@ export class ColorsComponent implements OnInit {
 
   // check if the item are selected
   checked(item){
-    if(this.colors.indexOf(item) != -1){
+    if(this.colors && this.colors.indexOf(item) != -1){
       return true;
     }
   }

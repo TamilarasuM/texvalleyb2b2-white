@@ -2,6 +2,7 @@ import { ViewportScroller } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { Product } from '../../../shared/classes/product';
 import { ProductService } from "../../../shared/services/product.service";
 import { Resolver } from "../../../shared/services/resolver.service";
 
@@ -15,6 +16,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
   
   public grid: string = 'col-xl-3 col-md-6';
   public layoutView: string = 'grid-view';
+  public colorKey: string = 'colors';
+  public WeightKey: string = 'Weight';
+  public categoryKey: string = 'category';
+  public filterCollection: any[] = ["Weight", "category", "size"];
   public products: Product[] = [];
   public brands: any[] = [];
   public colors: any[] = [];
@@ -27,7 +32,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public paginate: any = {}; // Pagination use only
   public sortBy: string; // Sorting Order
   public mobileSidebar: boolean = false;
-  public loader: boolean = false;
+  public loader = false;
   public segmentID: string;
   public productname: string;
   public tempData = new BehaviorSubject([]);
@@ -55,7 +60,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.products = this.productService.sortProducts(this.products, this.sortBy);
       this.resolverSVC.dataList.subscribe((function (res) {
         this.products = this.productService.sortProducts(res, this.sortBy);
+        // this.filterCollection =  this.attribute
+        this.filterCollection = Object.keys(this.products[0]).splice( 5, 5);
         this.products = this.productService.filterProductCollection(this.tags, this.products);
+
         this.loader =true;
       }).bind(this))
 
