@@ -11,28 +11,24 @@ import { ProductService } from '../../services/product.service';
 export class MenuComponent implements OnInit {
 
   public menuItems: Menu[];
-
-  constructor(private router: Router, public navServices: NavService, public productSvc:ProductService) {
+  constructor(private router: Router, public navServices: NavService, public productSvc: ProductService) {
     this.navServices.items.subscribe(menuItems => {
-      if(menuItems.length>0){
-        
-        menuItems =  menuItems.filter( function(args) {  
-          if(!(args.title.indexOf("My Account")>-1 || args.title.indexOf("Login")>-1 || args.title.indexOf("Buyer Benifits")>-1 || args.title.indexOf("Why Texvalley B2B")>-1))
-          return args;
-        } )
-        // if(menuItems[menuItems.length-1].title.indexOf("My Account")>-1 || menuItems[menuItems.length-1].title.indexOf("Login")>-1)
-        //   menuItems.pop();
+      if (menuItems.length > 0) {
+        menuItems = menuItems.filter(function (args) {
+          if (!(args.title.indexOf("My Account") > -1 || args.title.indexOf("Login") > -1 || args.title.indexOf("Buyer Benifits") > -1 || args.title.indexOf("Why Texvalley B2B") > -1))
+            return args;
+        })
         menuItems = this.navServices.updateMenus(menuItems);
       }
-        this.menuItems = menuItems;
-     });
+      this.menuItems = menuItems;
+    });
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
     });
   }
 
   ngOnInit(): void {
-    
+
   }
 
   mainMenuToggle(): void {
@@ -43,22 +39,18 @@ export class MenuComponent implements OnInit {
   toggletNavActive(item) {
     item.active = !item.active;
   }
-  logout(){
+  logout() {
     localStorage.removeItem("LoginDetails");
     this.navServices.items.subscribe(menuItems => {
-      if(menuItems.length>0){
-        menuItems =  menuItems.filter( function(args) {  
-          if(!(args.title.indexOf("My Account")>-1 || args.title.indexOf("Login")>-1 || args.title.indexOf("Buyer Benifits")>-1 || args.title.indexOf("Why Texvalley B2B")>-1))
-          return args;
-        } )
+      if (menuItems.length > 0) {
+        menuItems = menuItems.filter(function (args) {
+          if (!(args.title.indexOf("My Account") > -1 || args.title.indexOf("Login") > -1 || args.title.indexOf("Buyer Benifits") > -1 || args.title.indexOf("Why Texvalley B2B") > -1))
+            return args;
+        })
         this.menuItems = this.navServices.updateMenus(menuItems);
       }
-      })
+    })
     this.productSvc.cartDetails.next([]);
     this.router.navigate(['/home/fashion']);
   }
-
-
-  
-
 }

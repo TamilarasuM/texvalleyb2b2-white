@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -36,10 +37,6 @@ export class RegisterComponent implements OnInit {
       'pincode': new FormControl(null, [Validators.required]),
     });
 
-    // this.SignupForm.valueChanges.subscribe(val => { 
-    //   
-
-    // })
 
     this.product.getState().subscribe((res) => {
       if (res) {
@@ -47,38 +44,17 @@ export class RegisterComponent implements OnInit {
         this.states = res.map((data) => { return data.state_name });
       }
     })
-
-    //  this.SignupForm.setValue({
-    //   address: "Erode", buyer_name: "Buyer name test", city: "ED", company_name: "Company test", email_id: "test@gmail.com",
-    //   mobile_no: 99428910221, pincode: "638108",
-    //   state: "TN"
-    // })
-
   }
 
 
   onSubmit() {
-
     if (this.SignupForm.valid) {
-      // alert(JSON.stringify(this.SignupForm.value));
-      // if (this.formTitle == "My Profile")
-      //   this.updateProfile();
-      // else
-      return this.httpClient.post<any>("https://stage.texvalleyb2b.in/api_web/buyer_signup.php", JSON.stringify(this.SignupForm.value)).subscribe(
+      return this.httpClient.post<any>(environment.applicationUrl.buyerSignUpUrl, JSON.stringify(this.SignupForm.value)).subscribe(
         res => {
-
           this.errorMessage = res["status"];
           if (!(res["status"].indexOf("already Registered") > -1)) {
             this.isOtp = true;
-            // this.isSignup = false;
-            //  this.isError =true;
-            // this.changeView("isOtp");
-            // this.formTitle = "Mobile OTP verification";
           }
-          // else {
-          //   this.SignupForm.controls['mobile_no'].setErrors({ 'incorrect': true });
-          // }
-          alert(res["status"])
         }
       );
     }
@@ -87,7 +63,7 @@ export class RegisterComponent implements OnInit {
   validateOTP(args: number) {
     if (this.SignupForm.valid) {
       var data = { otp: args["value"] }
-      return this.httpClient.post<any>("https://stage.texvalleyb2b.in/api_web/buyer_otp_verification.php", JSON.stringify(data)).subscribe(
+      return this.httpClient.post<any>( environment.applicationUrl.buyerOtpVerificationUrl, JSON.stringify(data)).subscribe(
         res => {
 
           if (!(res["message"].indexOf("Incorrect OTP") > -1)) {
@@ -121,38 +97,29 @@ export class RegisterComponent implements OnInit {
   }
 
   checkPinCode(pincodeValue) {
-
-
-    // this.SignupForm.patchValue({ "city": "erode" })
     if(pincodeValue.length==6){
-      this.httpClient.post<any>(" https://stage.texvalleyb2b.in/api_web/get_pincode.php", JSON.stringify({pincode:pincodeValue})).subscribe(
+      this.httpClient.post<any>( environment.applicationUrl.pincodeUrl, JSON.stringify({pincode:pincodeValue})).subscribe(
         res => {
-        
         if(res && res.length>0 && res[0].state) {
         this.SignupForm.patchValue({ "state": res[0].state });
         this.SignupForm.patchValue({ "city": res[0].city });
         this.SignupForm.patchValue({ "area": res[0].area[0].area });
-
         (<HTMLInputElement>document.getElementById("states")).value =res[0].state;
         this.stateDetails.filter((args) => {
           if (res[0].state.indexOf(args.state_name) > -1) {
             this.cities = args.cities; 
             this.areas = res[0].area;
-            
           }
         });
         setTimeout(() => {
-          
           (<HTMLInputElement>document.getElementById("cities")).value = res[0].city;
         }, 1200);
 
         setTimeout(() => {
-          
           (<HTMLInputElement>document.getElementById("areaList")).value = res[0].area[0].area;
         }, 1200);
        
-        // document.getElementById('states').value=res[0].state ;
-        // document.getElementById('cities').value=res[0].city ;
+       
         }}
         )
     }

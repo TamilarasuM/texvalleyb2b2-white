@@ -67,20 +67,13 @@ export class ProductLeftSidebarComponent implements OnInit {
       this.a_id = res[0].a_id
       this.selectedSize = res[0].size;
       this.sizeCost = parseInt(res[0].cost);
-
-
-      // this.productService.templateJSON["images"][0].src = data.image_url;
       this.productService.templateJSON["images"] = data.images;
       this.productService.templateJSON.variants = [];
       for (var i = 0; i < res.length; i++) {
         debugger
         var template = { "variant_id": 101, "id": 1, "sku": "sku1", a_id: res[i]["a_id"], price : res[i].cost, "size": res[i].size, "color": data.color, "image_id": 111 }
         this.productService.templateJSON.variants.push(template);
-        // this.productService.templateJSON.variants[i].size = res[i].size;
-        // this.productService.templateJSON.variants[i].color = data.color;
       }
-      // this.productService.templateJSON["images"][1].src = "//stage.texvalleyb2b.in/"+data.image_url;
-      // this.productService.templateJSON["images"][2].src = "//stage.texvalleyb2b.in/"+data.image_url;
       this.product = this.productService.templateJSON;
 
     }).bind(this))

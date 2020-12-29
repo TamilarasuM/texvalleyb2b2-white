@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input,
-  Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {
+    Component,
+    Inject, Input, OnDestroy, OnInit,
+    PLATFORM_ID, TemplateRef, ViewChild
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from "../../../classes/product";
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../../../shared/services/product.service';
+import { Product } from "../../../classes/product";
 
 @Component({
   selector: 'app-quick-view',

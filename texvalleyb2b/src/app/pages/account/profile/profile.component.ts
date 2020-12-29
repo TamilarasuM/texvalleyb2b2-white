@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
     });
     this.productService.getProfile().subscribe((res) => {
       if (res.length > 0) {
-        // this.image = "//stage.texvalleyb2b.in/" + res[0].photo;
           this.SignupForm.patchValue(
           {
             address: res[0].address,
@@ -56,31 +55,13 @@ export class ProfileComponent implements OnInit {
          debugger
       this.productService.updateProfile( JSON.stringify(profileData)).subscribe(
           res => {
-            // if (!(res["status"].indexOf("already Registered") > -1)) {
-            // }
             if(res.length>0 && res[0].message.indexOf("Success")>-1)
               this.tost.success(res[0].message)
             else
-            this.tost.error("error")
-
-            // alert(res["status"])
+              this.tost.error("error")
           }
         );
     }
   }
-
-  
-  // this.SignupForm.patchValue( //res[0]
-  //   {
-  //     address: res[0].address,
-  //     buyer_name: res[0].contact_name,
-  //     city: res[0].city,
-  //     company_name: res[0].company_name,
-  //     email_id: res[0].email_id,
-  //     mobile_no: res[0].mobile_no,
-  //     pincode: res[0].pin_code,
-  //     state: res[0].state
-  //   }
-  // )
 
 }
