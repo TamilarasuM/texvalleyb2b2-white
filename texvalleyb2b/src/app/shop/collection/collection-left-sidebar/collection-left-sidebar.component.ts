@@ -19,7 +19,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public colorKey: string = 'colors';
   public WeightKey: string = 'Weight';
   public categoryKey: string = 'category';
-  public filterCollection: any[] = ["Weight", "category", "size"];
+  public filterCollection: any[] = [];
   public products: Product[] = [];
   public brands: any[] = [];
   public colors: any[] = [];
@@ -60,11 +60,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.products = this.productService.sortProducts(this.products, this.sortBy);
       this.resolverSVC.dataList.subscribe((function (res) {
         this.products = this.productService.sortProducts(res, this.sortBy);
-        // this.filterCollection =  this.attribute
-        this.filterCollection = res[0].attribute.map((args) => args.a_name);// Object.keys(this.products[0]).splice( 5, 5);
-        debugger
+        if(res[0].attribute)
+          this.filterCollection = res[0].attribute.map((args) => args.a_name);// Object.keys(this.products[0]).splice( 5, 5);
         this.products = this.productService.filterProductCollection(this.tags, this.products);
-
         this.loader =true;
       }).bind(this))
 

@@ -16,9 +16,8 @@
                             <!-- Category filter start -->
                             <!-- <app-categories></app-categories> -->
                         </div>
-                        <!-- silde-bar colleps block end here -->
-                        <!-- side-bar colleps block stat -->
-                        <div class="collection-filter-block">
+          
+                        <div *ngIf="filterCollection?.length > 0" class="collection-filter-block">
                             <!-- brand filter start -->
                             <!-- <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
                             </app-brands> -->

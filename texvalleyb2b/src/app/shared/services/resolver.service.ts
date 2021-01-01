@@ -28,6 +28,7 @@ export class Resolver implements Resolve<Product> {
     var productname = route.params["name"];
     var search = route.params["search"];
     if(search) {
+      this.currentProduct.next(search);
       this.productService.getProductSearchList(search).toPromise().then(
         ( (function (response) {
           var responseList=[];
