@@ -45,7 +45,7 @@
     </li> -->
     <li class="onhover-div mobile-cart cart-customized">
       <div>
-        <a [routerLink]="['/shop/cart']">
+        <a [routerLink]="['/cart']">
           <img src="assets/images/icon/cart1.png" class="img-fluid" alt="">
           <i class="ti-shopping-cart"></i>
         </a>
@@ -57,12 +57,12 @@
       <ul class="show-div shopping-cart" *ngIf='products.length'>
         <li *ngFor="let product of products">
           <div class="media">
-            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+            <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]">
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
               <img class="mr-3" [src]="product?.image_url" [alt]="product?.images[0].alt">
             </a>
             <div class="media-body">
-              <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+              <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]">
                 <h4>{{ product?.title }}</h4>
               </a>
               <h4>
@@ -85,8 +85,8 @@
         </li>
         <li>
           <div class="buttons">
-            <a [routerLink]="['/shop/cart']" class="view-cart">view cart</a>
-            <!-- <a [routerLink]="['/shop/checkout']" class="checkout">checkout</a> -->
+            <a [routerLink]="['/cart']" class="view-cart">view cart</a>
+            <!-- <a [routerLink]="['/checkout']" class="checkout">checkout</a> -->
           </div>
         </li>
       </ul>

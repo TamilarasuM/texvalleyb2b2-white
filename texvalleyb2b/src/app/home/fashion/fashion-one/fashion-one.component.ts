@@ -21,7 +21,9 @@ export class FashionOneComponent implements OnInit {
   public number: number = 1000;
   public products: Product[] = [];
   public newArivals: Product[] = [];
-  public topCollections: Product[] = [];
+  public menTopCollections: Product[] = [];
+  public womenTopCollections: Product[] = [];
+  public homeTopCollections: Product[] = [];
   public salesList: Product[] = [];
   public productCollections: any[] = [];
   
@@ -38,7 +40,9 @@ export class FashionOneComponent implements OnInit {
     // });
     this.productService.getNewArivals().subscribe( response=> {
       this.newArivals = this.convertAppProduct(response[0].new_arrival);
-      this.topCollections = this.convertAppProduct(response[0].top_collection);
+      this.menTopCollections = this.convertAppProduct(response[0].top_collection);
+      this.womenTopCollections = this.convertAppProduct(response[0].top_collection2);
+      this.homeTopCollections = this.convertAppProduct(response[0].top_collection3);
       this.salesList = this.convertAppProduct(response[0].on_sales);
     })
   }

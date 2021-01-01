@@ -3,14 +3,14 @@
       <span class="lable3" *ngIf="product.new">new</span>
     </div>
     <div class="front">
-      <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+      <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]">
         <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
              [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src"  
              class="img-fluid lazy-loading" alt="{{ product?.images[0].alt }}">
       </a>
     </div>
     <div class="back" *ngIf="onHowerChangeImage && product.images.length > 1">
-      <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+      <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]">
         <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product?.images[1].alt }}">
       </a>
     </div>
@@ -36,7 +36,7 @@
   <div class="product-info">
     <div>
       <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-      <a [routerLink]="['/shop/product/left/sidebar/', product?.title.replace(' ', '-')]">
+      <a [routerLink]="['/product/left/sidebar/', product?.title.replace(' ', '-')]">
         <h6>{{ product?.title | titlecase }}</h6>
       </a>
       <h4>

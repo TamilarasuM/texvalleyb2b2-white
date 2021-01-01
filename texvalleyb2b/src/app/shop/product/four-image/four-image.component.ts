@@ -67,7 +67,7 @@ export class FourImageComponent implements OnInit {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
     if(status)
-      this.router.navigate(['/shop/cart']);
+      this.router.navigate(['/cart']);
   }
 
   // Buy Now
@@ -75,7 +75,7 @@ export class FourImageComponent implements OnInit {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
     if(status)
-      this.router.navigate(['/shop/checkout']);
+      this.router.navigate(['/checkout']);
   }
 
   // Add to Wishlist

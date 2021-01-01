@@ -54,7 +54,7 @@
                         </div>
                         <div class="product-buttons">
                             <a href="javascript:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="addToCart(product)">add to cart</a>
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]" class="btn btn-solid">view detail</a>
+                            <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]" class="btn btn-solid">view detail</a>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <div class="img-wrapper">
     <div class="ribbon" *ngIf="product.new"><span>new</span></div>
     <div class="front">
-        <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+        <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]">
             <img  [defaultImage]="'assets/images/product/placeholder.jpg'"
                   [lazyLoad]="product.images[0].src" class="img-fluid"
                   alt="{{ product.images[0].alt }}">
@@ -32,7 +32,7 @@
 </div>
 <div class="product-info">
     <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-    <a [routerLink]="['/shop/product/left/sidebar/', product?.title.replace(' ', '-')]">
+    <a [routerLink]="['/product/left/sidebar/', product?.title.replace(' ', '-')]">
     	<h6>{{ product?.title | titlecase }}</h6>
     </a>
     <h4>{{ product?.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}</h4>

@@ -1,8 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-    Component,
-    Inject, Input, OnDestroy, OnInit,
-    PLATFORM_ID, TemplateRef, ViewChild
+  Component,
+  Inject, Input, OnDestroy, OnInit,
+  PLATFORM_ID, TemplateRef, ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -108,7 +108,7 @@ export class QuickViewComponent implements OnInit, OnDestroy  {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
     if(status)
-      this.router.navigate(['/shop/cart']);
+      this.router.navigate(['/cart']);
   }
 
   ngOnDestroy() {

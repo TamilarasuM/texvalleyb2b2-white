@@ -45,7 +45,7 @@ export class NavService {
 			res.map((function myFunc(args) {
 				var segmentID = args["segment_id"];
 				var subMenus = args["product_name"].map(function myFunc(args) {
-					return { megaMenu: false, path: '/shop/collection/left/sidebar', segment_ID: segmentID, product_name: args["products"], title: args["products"], image_url: args['image'], type: 'link', sort_order: args["sort_order"] }
+					return { megaMenu: false, path: '/collection/left/sidebar', segment_ID: segmentID, product_name: args["products"], title: args["products"], image_url: args['image'], type: 'link', sort_order: args["sort_order"] }
 				});
 				var isAddMore = false;
 				subMenus = subMenus.filter(function (args) {
@@ -54,9 +54,9 @@ export class NavService {
 					return (args.sort_order != 0);
 				});
 				if (subMenus.length > 0)
-					menuItems.push({ title: args["segment"], megaMenu: false, path: '/shop/segments', segment_ID: args["segment_id"], product_name: args["products"], type: 'sub', active: false, children: subMenus })
+					menuItems.push({ title: args["segment"], megaMenu: false, path: '/segments', segment_ID: args["segment_id"], product_name: args["products"], type: 'sub', active: false, children: subMenus })
 				if (isAddMore)
-					subMenus.push({ megaMenu: false, path: '/shop/segments', segment_ID: segmentID, product_name: args["products"], title: "More..", type: 'elink', sort_order: args["sort_order"] })
+					subMenus.push({ megaMenu: false, path: '/segments', segment_ID: segmentID, product_name: args["products"], title: "More..", type: 'elink', sort_order: args["sort_order"] })
 			}).bind(this))
 			this.items.next(menuItems)
 		})
@@ -66,7 +66,7 @@ export class NavService {
 		this.isLogin = localStorage.getItem("LoginDetails") == null ? false : true;
 		var myccMenu = this.isLogin ? [
 			{ megaMenu: false, title: "MY Profile", path: '/profile', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
-			{ megaMenu: false, title: "MY cart", path: '/shop/cart', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
+			{ megaMenu: false, title: "MY cart", path: '/cart', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
 			{ megaMenu: false, title: "MY Orders", path: '/myorders', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
 			{ megaMenu: false, title: "MY KYC", path: '/kyc', segment_ID: 2, product_name: null, type: 'extLink', sort_order: 1 },
 			{ megaMenu: false, title: "Logout", path: '/login', segment_ID: 2, product_name: null, type: 'logout', sort_order: 1 },

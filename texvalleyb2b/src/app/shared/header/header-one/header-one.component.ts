@@ -43,7 +43,7 @@ export class HeaderOneComponent implements OnInit {
 
   searchData(args) {
     if(args.target.value!="")
-      this.router.navigate(['/shop/products',args.target.value])
+      this.router.navigate(['/products',args.target.value])
   }
   outsideClick(args){
 

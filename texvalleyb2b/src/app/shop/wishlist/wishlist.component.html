@@ -22,12 +22,12 @@
           <tbody *ngFor="let product of products">
             <tr>
               <td>
-                  <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+                  <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]">
                     <img [src]="product.images[0].src" [alt]="product.images[0].alt">
                   </a>
               </td>
               <td>
-                  <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">{{ product.title | titlecase }}</a>
+                  <a [routerLink]="['/product/left/sidebar/', product.title.replace(' ', '-')]">{{ product.title | titlecase }}</a>
                   <div class="mobile-cart-content row">
                     <div class="col-xs-3">
                       <p>{{ product.stock > 0 ? 'in stock' : 'out of stock' }}</p>
@@ -42,7 +42,7 @@
                         <a href="javascript:void(0)" (click)="removeItem(product)" class="icon mr-1">
                           <i class="ti-close"></i>
                         </a>
-                        <a [routerLink]="['/shop/cart']" (click)="addToCart(product)" class="cart">
+                        <a [routerLink]="['/cart']" (click)="addToCart(product)" class="cart">
                           <i class="ti-shopping-cart"></i>
                         </a>
                       </h2>
@@ -72,8 +72,8 @@
     </div>
     <div class="row wishlist-buttons" *ngIf='products.length'>
       <div class="col-12">
-        <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
-        <a [routerLink]="['/shop/checkout']" class="btn btn-solid">check out</a>
+        <a [routerLink]="['/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
+        <a [routerLink]="['/checkout']" class="btn btn-solid">check out</a>
       </div>
     </div>
   </div>

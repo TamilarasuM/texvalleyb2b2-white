@@ -55,7 +55,7 @@ export class SettingsComponent implements OnInit {
 
     if (this.products.length == 0 && this.islogin) {
       this.productService.getCartDetails().subscribe((response) => {
-        if (response.length) {
+        if (response && response.length) {
           this.products = this.productService.convertToProduct(response);
           this.productService.cartDetails.next(this.products);
         }

@@ -105,9 +105,9 @@
                     text-align: center;
                 }
                 .collection-view {
-                    width: 20%;
+                    width: 70%;
                     padding-right: 0 !important;
-                    border-left: 1px solid $round-border;
+                    // border-left: 1px solid $round-border;
                 }
                 .collection-grid-view {
                     padding: 10px !important;
@@ -123,8 +123,8 @@
                     }
                 }
                 .product-page-filter {
-                    border-right: 1px solid $round-border;
-                    width: 30%;
+                    // border-right: 1px solid $round-border;
+                    width: 20%;
                 }
                 .product-page-per-view {
                     width: 30%;
@@ -3873,7 +3873,7 @@ background-color: $black;*/
             thead {
                 th {
                     &:nth-last-child(-n+3) {
-                        display: none;
+                        // display: none;
                     }
                 }
             }
@@ -3882,7 +3882,7 @@ background-color: $black;*/
             tr {
                 td {
                     &:nth-last-child(-n+3) {
-                        display: none;
+                        // display: none;
                     }
                     .mobile-cart-content {
                         display: flex;

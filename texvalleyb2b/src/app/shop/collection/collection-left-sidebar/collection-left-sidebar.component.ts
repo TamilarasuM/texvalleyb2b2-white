@@ -61,7 +61,8 @@ export class CollectionLeftSidebarComponent implements OnInit {
       this.resolverSVC.dataList.subscribe((function (res) {
         this.products = this.productService.sortProducts(res, this.sortBy);
         // this.filterCollection =  this.attribute
-        this.filterCollection = Object.keys(this.products[0]).splice( 5, 5);
+        this.filterCollection = res[0].attribute.map((args) => args.a_name);// Object.keys(this.products[0]).splice( 5, 5);
+        debugger
         this.products = this.productService.filterProductCollection(this.tags, this.products);
 
         this.loader =true;

@@ -333,23 +333,36 @@ export class ProductService {
       })
     ));
   }
-  public filterProductCollection(filter: any, prodCollection: any): Observable<any[]> {
+  public filterProductCollection(filterTag: any, prodCollection: any): Observable<any[]> {
     return prodCollection.filter((item: Product) => {
-      if (!filter.length)
-        return true
-      const Tags = filter.some((prev) => { // Match Tags
-        var filterParams = prev.split("-");
-        if (filterParams.length>0) { 
-          return item[""+filterParams[0]+""] == filterParams[1];
+      if (!filterTag.length)
+        return true;
+      // const Tags = filterTag.some((prev) => { // Match Tags
+debugger
+        for(var j=0; j < filterTag.length; j++){
+          var filterParams = filterTag[j].split("-");
+          if (filterParams.length>0) { 
+          var searchKeyItem= item["attribute"].filter((args) => { return (args["a_name"] == filterParams[0] && args["a_value"] == filterParams[1]) })
+          if(searchKeyItem.length>0)
+            return true;
+            debugger
+          }
         }
-        // if (item) {
-        //   // if (item.tags.includes(prev)) 
-        //   if (filter.indexOf(item.brand) > -1) {
-        //     return item.brand;
+
+        // for(var i=0; i < filterTag.length; i++){
+        //   for(var k=0; k < item["attribute"].length; k++){
+        //     var filterParams = filterTag[i].split("-");
+        //     if (filterParams.length>0) { 
+        //     // var searchKeyItem= item["attribute"].filter((args) => { return (args["a_name"] == filterParams[0] && args["a_value"] == filterParams[1]) })
+        //     // if(searchKeyItem.length>0)
+        //     //   return true;
+        //       debugger
+        //     }
         //   }
         // }
-      })
-      return Tags
+
+      // })
+      // return Tags
     })
   }
   // Sorting Filter

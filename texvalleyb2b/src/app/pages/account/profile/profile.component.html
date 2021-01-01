@@ -22,7 +22,7 @@
                         <div class="col-md-6">
                             <label for="company_name">Company Name</label>
                             <input type="text" class="form-control" id="company_name" formControlName="company_name"
-                                placeholder="Company Name">
+                                placeholder="Company Name" disabled>
                             <div class="help-block"
                                 *ngIf="!SignupForm.get('company_name').valid&&SignupForm.get('company_name').touched">
                                 <span style="color: red;"

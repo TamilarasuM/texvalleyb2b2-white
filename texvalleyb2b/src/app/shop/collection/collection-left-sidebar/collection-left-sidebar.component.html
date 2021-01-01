@@ -20,8 +20,8 @@
                         <!-- side-bar colleps block stat -->
                         <div class="collection-filter-block">
                             <!-- brand filter start -->
-                            <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
-                            </app-brands>
+                            <!-- <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
+                            </app-brands> -->
                             <ng-container  *ngFor="let dynamicFilter of filterCollection">
                                 <app-colors [products]="products" [key]="dynamicFilter" [colors]="colors" (colorsFilter)="updateFilter($event)">
                                 </app-colors>
@@ -42,7 +42,7 @@
                         <!-- side-bar banner start here -->
                         <!-- cmt -->
                         <!-- <div class="collection-sidebar-banner">
-                            <a [routerLink]="['/shop/collection/left/sidebar']">
+                            <a [routerLink]="['/collection/left/sidebar']">
                                 <img src="assets/images/collection-sidebar-banner.png" class="img-fluid" alt="banner">
                             </a>
                         </div> -->
@@ -54,7 +54,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <!-- <div class="top-banner-wrapper">
-                                    <a [routerLink]="['/shop/collection/left/sidebar']">
+                                    <a [routerLink]="['/collection/left/sidebar']">
                                         <img src="assets/images/collection-banner.jpg" class="img-fluid " alt="">
                                     </a>
                                 </div> -->
@@ -94,7 +94,7 @@
                                                 <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
                                                 <h3>Sorry! Couldn't find the product you were looking For!!! </h3>
                                                 <p>Please check if you have misspelt something or try searching with other words.</p>
-                                                <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
+                                                <a [routerLink]="['/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
                                             </div>
                                         </div>
                                     </div>

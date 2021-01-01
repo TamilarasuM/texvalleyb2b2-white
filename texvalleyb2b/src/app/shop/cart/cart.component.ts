@@ -96,7 +96,7 @@ export class CartComponent implements OnInit {
         this.tst.success(res[0].message)
         this.couponAmt = res[0].amount;
         this.totalAmt  =  this.totalAmt  +  this.couponAmt ;
-        // this.router.navigate(['/shop/cart'])
+        // this.router.navigate(['/cart'])
       }
 
     }).bind(this))
@@ -115,7 +115,7 @@ export class CartComponent implements OnInit {
         
         // this.couponAmt = res[0].amount;
         // this.totalAmt  =  this.totalAmt  +  this.couponAmt ;
-        // this.router.navigate(['/shop/cart'])
+        // this.router.navigate(['/cart'])
       }
 
     }).bind(this))

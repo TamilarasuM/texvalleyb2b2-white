@@ -4,6 +4,14 @@ export const environment = {
   stripe_token: 'STRIPE_PUBLISHABLE_KEY',
   paypal_token: 'PAYPAL_CLIENT_ID',
   applicationUrl : {
+    loginUrl:"https://stage.texvalleyb2b.in/api_web/login.php",
+    loginOtpUrl:"https://stage.texvalleyb2b.in/api_web/login_otp.php",
+    optVerificationUrl: "https://stage.texvalleyb2b.in/api_web/login_otp_verification.php",
+    forgetPwdUrl:"https://stage.texvalleyb2b.in/api_web/forget_password.php",
+    buyerSignUpUrl:"https://stage.texvalleyb2b.in/api_web/buyer_signup.php",
+    buyerOtpVerificationUrl:"https://stage.texvalleyb2b.in/api_web/buyer_otp_verification.php",
+    pincodeUrl:"https://stage.texvalleyb2b.in/api_web/get_pincode.php",
+    getSegmentsUrl :"https://stage.texvalleyb2b.in/api_web/get_segment.php",
     searchUrl: "https://stage.texvalleyb2b.in/api_web/get_search_products.php",
     getProductListUrl: "https://stage.texvalleyb2b.in/api_web/get_product.php",
     getNewArivalsUrl: "https://stage.texvalleyb2b.in/api_web/get_new_arrival.php",
@@ -19,5 +27,6 @@ export const environment = {
     updateProfileUrl : "https://stage.texvalleyb2b.in/api_web/send_update_profile.php",
     kycURL : "https://stage.texvalleyb2b.in/api_web/send_kyc_update.php",
     getProfileUrl : " https://stage.texvalleyb2b.in/api_web/get_profile.php",
+    updateWalletUrl : "https://stage.texvalleyb2b.in/api_web/update_wallet.php"
 }
 };
