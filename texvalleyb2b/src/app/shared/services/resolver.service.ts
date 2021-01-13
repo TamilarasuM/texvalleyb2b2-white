@@ -21,7 +21,6 @@ export class Resolver implements Resolve<Product> {
 
   // Resolver
   async resolve(route: ActivatedRouteSnapshot): Promise<any> {
-    debugger
     let prmse = await Promise;
     //await new Promise(resolve => setTimeout(resolve, 1000));  
     var segmentID= route.params["id"];
@@ -47,7 +46,8 @@ export class Resolver implements Resolve<Product> {
     }
     else if(segmentID && productname) {
       this.currentProduct.next(productname);
-      this.productService.getProductList(segmentID,productname).toPromise().then(
+      
+      this.productService.getProductList(segmentID,productname, 0).toPromise().then(
       ( (function (response) {
         var responseList=[];
         if(response !=null && response.length>0){

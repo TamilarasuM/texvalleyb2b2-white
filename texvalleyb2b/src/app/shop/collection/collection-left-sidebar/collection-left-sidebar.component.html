@@ -82,7 +82,7 @@
                                     <app-grid [products]="products" [paginate]="paginate" [layoutView]="layoutView" [productInfo]="productname" [sortBy]="sortBy" (setGrid)="updateGridLayout($event)" (setLayout)="updateLayoutView($event)" (sortedBy)="sortByFilter($event)">
                                     </app-grid>
                                     <div class="product-wrapper-grid" [ngClass]="layoutView">
-                                        <div class="row">
+                                        <div class="row"  infiniteScroll [infiniteScrollDistance]="0.1" (scrolled)="onScroll()">
                                             <div class="col-grid-box" [ngClass]="grid" *ngFor="let product of products">
                                                 <div class="product-box">
                                                     <app-product-box-one [product]="product" [currency]="productService?.Currency" [thumbnail]="false" [cartModal]="true" [loader]="true">

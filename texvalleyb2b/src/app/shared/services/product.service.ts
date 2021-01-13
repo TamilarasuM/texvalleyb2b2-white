@@ -53,9 +53,10 @@ export class ProductService {
     var headers = Object.assign(params, JSON.parse(localStorage.getItem("LoginDetails")))
     return this.http.post<any>(environment.applicationUrl.searchUrl, JSON.stringify(headers))
   }
-  public getProductList(S_ID: string, pname: string) {
+  public getProductList(S_ID: string, pname: string ,  paginatedCnt:number) {
+    var offsetCnt=  paginatedCnt +30;
     // var getProductListURL = "https://stage.texvalleyb2b.in/api_web/get_product.php";
-    var params = { "segment_id": S_ID, "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": pname }
+    var params = { "segment_id": S_ID, "sub_segment_id": "", "category_id": "", "sub_category_id": "", "product_name": pname,offset:offsetCnt  }
     var headers = Object.assign(params, JSON.parse(localStorage.getItem("LoginDetails")))
     return this.http.post<any>(environment.applicationUrl.getProductListUrl, JSON.stringify(headers))
   }
@@ -333,36 +334,32 @@ export class ProductService {
       })
     ));
   }
-  public filterProductCollection(filterTag: any, prodCollection: any): Observable<any[]> {
+  public filterProductCollection(filterTag: any, prodCollection: any): any[] {
     return prodCollection.filter((item: Product) => {
       if (!filterTag.length)
         return true;
-      // const Tags = filterTag.some((prev) => { // Match Tags
-debugger
-        for(var j=0; j < filterTag.length; j++){
-          var filterParams = filterTag[j].split("-");
-          if (filterParams.length>0) { 
-          var searchKeyItem= item["attribute"].filter((args) => { return (args["a_name"] == filterParams[0] && args["a_value"] == filterParams[1]) })
-          if(searchKeyItem.length>0)
-            return true;
-            debugger
-          }
-        }
-
-        // for(var i=0; i < filterTag.length; i++){
-        //   for(var k=0; k < item["attribute"].length; k++){
-        //     var filterParams = filterTag[i].split("-");
-        //     if (filterParams.length>0) { 
-        //     // var searchKeyItem= item["attribute"].filter((args) => { return (args["a_name"] == filterParams[0] && args["a_value"] == filterParams[1]) })
-        //     // if(searchKeyItem.length>0)
-        //     //   return true;
-        //       debugger
-        //     }
+// debugger
+        // for(var j=0; j < filterTag.length; j++){
+        //   var filterParams = filterTag[j].split("-");
+        //   if (filterParams.length>0) { 
+        //   var searchKeyItem= item["attribute"].filter((args) => { return (args["a_name"] == filterParams[0] && args["a_value"] == filterParams[1]) })
+        //   if(searchKeyItem.length>0)
+        //     return true;
+        //     debugger
         //   }
         // }
-
-      // })
-      // return Tags
+         var filterCnt =0;
+        for(var i=0; i < filterTag.length; i++){
+          for(var k=0; k < item["attribute"].length; k++){
+            var filterParams = filterTag[i].split("-");
+            if (filterParams.length>0) { 
+              if(item["attribute"][k]["a_name"] == filterParams[0] && item["attribute"][k]["a_value"] == filterParams[1]) 
+                 filterCnt ++;
+            }
+          }
+        }
+        if(filterCnt == filterTag.length )
+        return true;
     })
   }
   // Sorting Filter

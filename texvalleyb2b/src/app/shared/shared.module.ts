@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { BarRatingModule } from "ngx-bar-rating";
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CountoModule } from '../pages/countTo/counto.module2';
@@ -86,6 +87,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
     NgbModule,
     CarouselModule,
     BarRatingModule,
+    InfiniteScrollModule,
     LazyLoadImageModule.forRoot({
       // preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     }),
@@ -94,6 +96,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
   ],
   exports: [
     CommonModule,
+    InfiniteScrollModule,
     CountoModule,
     FormsModule,
     ReactiveFormsModule,
