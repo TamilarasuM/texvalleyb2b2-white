@@ -54,6 +54,7 @@ export class ColorsComponent implements OnInit {
 
   // check if the item are selected
   checked(item){
+    debugger
     if(this.colors && this.colors.indexOf(item) != -1){
       return true;
     }

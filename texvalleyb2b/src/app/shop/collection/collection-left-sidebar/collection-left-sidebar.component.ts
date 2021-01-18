@@ -37,7 +37,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public loadMore = true;
   public segmentID: string;
   public productname: string;
-  public offsetCount = 0;
+  // public offsetCount = 0;
   // public tempData = new BehaviorSubject([]);
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -64,24 +64,31 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.products = this.productService.sortProducts(this.products, this.sortBy);
       this.resolverSVC.dataList.subscribe((function (res) {
         debugger
-
-        this.offsetCount = res[0].offset;
-        if (res[0].offset_temp == 0) {
-          this.products = [];
-          this.loadMore = true;
-        }
-        
-        if(!this.isFilter || this.products.length ==0)
-           this.products = this.products.concat(this.productService.sortProducts(res, this.sortBy)); //.slice(0,30);
-         if(this.isFilter){
-              this.products =  res[0].offset == 30 ? res : this.currentProducts;
-             this.isFilter = false;
-        }
         if (res[0].attribute)
           this.filterCollection = res[0].attribute.map((args) => args.a_name);// Object.keys(this.products[0]).splice( 5, 5);
-        this.products = this.productService.filterProductCollection(this.tags, this.products);
+          // this.updateCheckBox()
+          // if(this.offsetCount  != res[0].offset)
+          // // {
+          //   this.offsetCount = res[0].offset;
+          // if (res[0].offset_temp == 0) {
+          //   this.currentProducts =  this.products = res;
+          //   // this.loadMore = true;
+          // }
+          // if(!this.isFilter || this.products.length ==0)
+          // if(this.products.length ==0 )
+          //    this.products = this.products.concat(this.productService.sortProducts(res, this.sortBy)); //.slice(0,30);
+          // if(this.currentProducts.length ==0)
+          //   this.currentProducts = this.products 
+          // if(this.isFilter){
+          //       // this.products =  res[0].offset == 30 ? res : this.currentProducts;
+          //     this.isFilter = false;
+         // }
 
-        this.loader = true;
+         if(this.currentProducts.length ==0 || this.resolverSVC.offsetCount == 0)
+            this.currentProducts = res;
+         this.products = this.productService.filterProductCollection(this.tags, this.currentProducts);
+      // }
+          this.loader = true;
       }).bind(this))
 
       // this.tempData.subscribe( (res)=>{
@@ -113,10 +120,21 @@ export class CollectionLeftSidebarComponent implements OnInit {
     }).bind(this))
   }
 
+  // ngAfterContentChecked() { 
+  //   if(this.resolverSVC.updateCheckBox){
+  //     this.updateCheckBox();
+  //     this.resolverSVC.updateCheckBox = false;
+  //   }
+  //   //alert('parent - ngAfterViewInit')
+  //  }
+
   // Append filter value to Url
   updateFilter(tags: any) {
     debugger
     this.isFilter = true;
+    var filterItems = tags.color ? tags.color.split(",") : [];
+    
+   // this.products = this.productService.filterProductCollection([...filterItems], [...this.currentProducts]);
     tags.page = null; // Reset Pagination
     this.router.navigate([], {
       relativeTo: this.route,
@@ -142,6 +160,17 @@ export class CollectionLeftSidebarComponent implements OnInit {
     });
   }
 
+  //update
+  updateCheckBox() {
+    debugger
+    if(this.resolverSVC.offsetCount ==0) {
+      var filterItems = this.tags;
+      for(var i=0; i < filterItems.length; i++){
+      if (document.querySelectorAll('.collection-filter [value="' + filterItems[i] + '"]').length > 0)
+        document.querySelectorAll('.collection-filter [value="' + filterItems[i] + '"]')[0]["checked"] = true;
+      }
+    }
+  }
   // Remove Tag
   removeTag(tag) {
     debugger
@@ -199,7 +228,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   onScroll() {
     debugger
     if (this.loadMore == true)
-      this.productService.getProductList(this.segmentID, this.productname, this.offsetCount).toPromise().then(
+      this.productService.getProductList(this.segmentID, this.productname, this.resolverSVC.offsetCount).toPromise().then(
         ((function (response) {
           var responseList = [];
           if (response == null)
@@ -214,16 +243,23 @@ export class CollectionLeftSidebarComponent implements OnInit {
             // this.products = this.products.concat(this.productService.sortProducts(responseList, this.sortBy)); //.slice(0,30);
             // this.products = this.productService.filterProductCollection(this.tags, this.products);
             // this.offsetCount = response[0].offset;
+            
+
+           
+            
             // if (responseList[0].offset_temp == 0) {
             //   this.products = [];
             //   this.loadMore = true;
             // }
-            this.currentProducts  =  this.currentProducts.concat(this.productService.sortProducts(responseList, this.sortBy));
-            console.log("Total Products on scroll:" + this.currentProducts.length)
-            console.log("Offset Count:" + this.offsetCount)
             // this.products = this.productService.filterProductCollection(this.tags, this.currentProducts);
-
-           this.resolverSVC.dataList.next(responseList);
+            if(this.resolverSVC.offsetCount  != response[0].offset) {
+              this.currentProducts  =  this.currentProducts.concat(this.productService.sortProducts(responseList, this.sortBy));
+              this.resolverSVC.offsetCount = response[0].offset;
+              console.log("Offset Count:" + this.resolverSVC.offsetCount)
+              console.log("Total Products on scroll:" + this.currentProducts.length)
+              this.resolverSVC.dataList.next(this.currentProducts );
+              }
+          //  this.resolverSVC.dataList.complete()
           }
         }).bind(this)))
   }

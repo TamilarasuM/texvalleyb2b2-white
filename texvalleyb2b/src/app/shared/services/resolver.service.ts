@@ -11,9 +11,13 @@ import { ProductService } from './product.service';
 export class Resolver implements Resolve<Product> {
   
   public product: Product = {};
+  // public dataList = new AsyncSubject();
   public dataList = new ReplaySubject(1);
   public currentProduct = new BehaviorSubject("");
-  public segmenetName = "Segmenets"
+  public segmenetName = "Segmenets";
+  public offsetCount = 0;
+  public updateCheckBox = false;
+
   constructor(
     private router: Router,
     public productService: ProductService,public navSrc:NavService
@@ -46,8 +50,8 @@ export class Resolver implements Resolve<Product> {
     }
     else if(segmentID && productname) {
       this.currentProduct.next(productname);
-      
-      this.productService.getProductList(segmentID,productname, 0).toPromise().then(
+      this.updateCheckBox = true;
+      this.productService.getProductList(segmentID,productname, this.offsetCount=0).toPromise().then(
       ( (function (response) {
         var responseList=[];
         if(response !=null && response.length>0){
