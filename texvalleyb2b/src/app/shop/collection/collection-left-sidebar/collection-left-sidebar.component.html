@@ -21,14 +21,17 @@
                             <!-- brand filter start -->
                             <!-- <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
                             </app-brands> -->
-                            <!-- <ng-container  *ngFor="let dynamicFilter of filterCollection">
+                            <ng-container  *ngFor="let dynamicFilter of filterCollection">
                                 <app-colors [products]="products" [key]="dynamicFilter" [colors]="colors" (colorsFilter)="updateFilter($event)">
                                 </app-colors>
-                            </ng-container> -->
-                            <ng-container  *ngFor="let dynamicFilter of filterCollection">
-                                <app-colors [products]="dynamicFilter" [key]="dynamicFilter.attribute" [colors]="colors" (colorsFilter)="updateFilter($event)">
-                                </app-colors>
                             </ng-container>
+                            
+                            <!-- <ng-container  *ngFor="let dynamicFilter of filterCollection">
+                                <app-colors [products]="dynamicFilter" [currentproducts]="products" [key]="dynamicFilter.attribute" [colors]="colors" (colorsFilter)="updateFilter($event)">
+                                </app-colors>
+                            </ng-container> -->
+
+
                             <!-- size filter start here -->
                             <!-- <app-size [products]="products" [size]="size" (sizeFilter)="updateFilter($event)">
                             </app-size> -->

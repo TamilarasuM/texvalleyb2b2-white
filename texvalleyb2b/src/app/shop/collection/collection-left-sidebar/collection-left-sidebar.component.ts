@@ -93,8 +93,11 @@ export class CollectionLeftSidebarComponent implements OnInit {
          }
           console.log("total_product:" + this.currentProducts[0].total_product)
          this.products = this.productService.filterProductCollection(this.tags, this.currentProducts);
-         if( this.currentProducts[0].filter)
-              this.filterCollection = this.currentProducts[0].filter;
+        //  if( this.currentProducts[0].filter)
+        //       this.filterCollection = this.currentProducts[0].filter;
+              debugger
+        if (res[0].attribute)
+          this.filterCollection = res[0].attribute.map((args) => args.a_name);
       // }
           this.loader = true;
       }).bind(this))
