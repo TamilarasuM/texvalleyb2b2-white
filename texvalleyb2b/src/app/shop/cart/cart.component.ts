@@ -158,7 +158,6 @@ export class CartComponent implements OnInit {
   }
 
   public removeItem(product: any) {
-    debugger
     this.removedCartId = product.cart_id;
     this.productService.removeCartItem(product).subscribe((function (response) {
       if (response.length > 0 && response[0].status.indexOf("Success") > -1) {

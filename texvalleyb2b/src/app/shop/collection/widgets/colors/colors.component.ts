@@ -25,18 +25,30 @@ export class ColorsComponent implements OnInit {
   get filterbycolor() {
     const uniqueColors = [];
     var field = this.key;
-    for(var i=0; i< this.products.length; i++){
-      if (this.products[i]["attribute"]) 
-      {
-        for(var j=0; j < this.products[i]["attribute"].length; j++){
-          if(this.products[i]["attribute"][j]["a_name"] === field) {
-          const index = uniqueColors.indexOf(this.products[i]["attribute"][j]["a_value"])
+    // for(var i=0; i< this.products.length; i++){
+    //   if (this.products[i]["attribute"]) 
+    //   {
+    //     for(var j=0; j < this.products[i]["attribute"].length; j++){
+    //       if(this.products[i]["attribute"][j]["a_name"] === field) {
+    //       const index = uniqueColors.indexOf(this.products[i]["attribute"][j]["a_value"])
+    //       if (index === -1) 
+    //          uniqueColors.push(this.products[i]["attribute"][j]["a_value"])
+    //       }
+    //     }
+    //   }
+    // }
+      // for(var i=0; i< this.products['value'].length; i++){
+      // if (this.products['value'][i]) 
+      // {
+        for(var j=0; j < this.products["value"].length; j++) 
+          if(this.products["value"][j]["value"]) {
+          const index = uniqueColors.indexOf(this.products["value"][j]["value"])
           if (index === -1) 
-             uniqueColors.push(this.products[i]["attribute"][j]["a_value"])
+             uniqueColors.push(this.products["value"][j]["value"])
           }
-        }
-      }
-    }
+    //     }
+    //   }
+    // }
     return uniqueColors
   }
 
@@ -54,7 +66,6 @@ export class ColorsComponent implements OnInit {
 
   // check if the item are selected
   checked(item){
-    debugger
     if(this.colors && this.colors.indexOf(item) != -1){
       return true;
     }

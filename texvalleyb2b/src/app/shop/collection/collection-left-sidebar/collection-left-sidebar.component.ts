@@ -64,8 +64,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.products = this.productService.sortProducts(this.products, this.sortBy);
       this.resolverSVC.dataList.subscribe((function (res) {
         debugger
-        if (res[0].attribute)
-          this.filterCollection = res[0].attribute.map((args) => args.a_name);// Object.keys(this.products[0]).splice( 5, 5);
+        // if (res[0].attribute)
+        //   this.filterCollection = res[0].attribute.map((args) => args.a_name);// Object.keys(this.products[0]).splice( 5, 5);
+
+        
           // this.updateCheckBox()
           // if(this.offsetCount  != res[0].offset)
           // // {
@@ -84,9 +86,14 @@ export class CollectionLeftSidebarComponent implements OnInit {
           //     this.isFilter = false;
          // }
 
-         if(this.currentProducts.length ==0 || this.resolverSVC.offsetCount == 0)
+         if(this.currentProducts.length ==0 || this.resolverSVC.offsetCount == 0) {
             this.currentProducts = res;
+            this.loadMore = true;
+         }
+          console.log("total_product:" + this.currentProducts[0].total_product)
          this.products = this.productService.filterProductCollection(this.tags, this.currentProducts);
+         if( this.currentProducts[0].filter)
+              this.filterCollection = this.currentProducts[0].filter;
       // }
           this.loader = true;
       }).bind(this))
@@ -252,7 +259,8 @@ export class CollectionLeftSidebarComponent implements OnInit {
             //   this.loadMore = true;
             // }
             // this.products = this.productService.filterProductCollection(this.tags, this.currentProducts);
-            if(this.resolverSVC.offsetCount  != response[0].offset) {
+            
+            if(this.resolverSVC.offsetCount  != response[0].offset && this.resolverSVC.offsetCount  < response[0].offset) {
               this.currentProducts  =  this.currentProducts.concat(this.productService.sortProducts(responseList, this.sortBy));
               this.resolverSVC.offsetCount = response[0].offset;
               console.log("Offset Count:" + this.resolverSVC.offsetCount)

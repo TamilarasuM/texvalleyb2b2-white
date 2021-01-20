@@ -13,7 +13,6 @@ export class CheckoutComponent implements OnInit {
   constructor(private route: ActivatedRoute,private router: Router, private prodSVC:ProductService, private toast:ToastrService) { 
     this.route.queryParams.subscribe(params => {
       this.prodSVC.updatedTranStatus(params).subscribe( (res)=>{
-        debugger
         if(res.status == 0)
             this.toast.error(res.message)
         else
