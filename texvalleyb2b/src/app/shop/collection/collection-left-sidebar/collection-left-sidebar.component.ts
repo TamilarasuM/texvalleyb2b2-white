@@ -88,6 +88,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
          if(this.currentProducts.length ==0 || this.resolverSVC.offsetCount == 0) {
             this.currentProducts = res;
+            this.resolverSVC.offsetCount =30;
             this.loadMore = true;
          }
           console.log("total_product:" + this.currentProducts[0].total_product)
