@@ -45,7 +45,8 @@ export class NavService {
 			res.map((function myFunc(args) {
 				var segmentID = args["segment_id"];
 				var subMenus = args["product_name"].map(function myFunc(args) {
-					return { megaMenu: false, path: '/collection/left/sidebar', segment_ID: segmentID, product_name: args["products"], title: args["products"], image_url: args['image'], type: 'link', sort_order: args["sort_order"] }
+					// return { megaMenu: false, path: '/collection/left/sidebar', segment_ID: segmentID, product_name: args["products"], title: args["products"], image_url: args['image'], type: 'link', sort_order: args["sort_order"] }
+					return { megaMenu: false, path: '/products/', segment_ID: segmentID, product_name: args["products"], title: args["products"], image_url: args['image'], type: 'link', sort_order: args["sort_order"] }
 				});
 				var isAddMore = false;
 				subMenus = subMenus.filter(function (args) {

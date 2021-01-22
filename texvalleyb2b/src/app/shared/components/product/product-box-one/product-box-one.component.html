@@ -15,7 +15,8 @@
       </a>
       </ng-container>
       <ng-container *ngIf="segmentView">
-        <a [routerLink]="['/collection/left/sidebar', product.id, product.category]">
+        <a [routerLink]="['/products/', product.id, product.category]">
+        <!-- <a [routerLink]="['/collection/left/sidebar', product.id, product.category]"> -->
           <img 
             [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
             [lazyLoad]="ImageSrc ? ImageSrc : product?.image_url" 
@@ -31,7 +32,8 @@
     <div style="margin-top: -30px;">
       <ng-container *ngIf="segmentView">
         <bar-rating  style="visibility: hidden;" [rate]="5" [readOnly]="true"></bar-rating>
-        <a [routerLink]="['/collection/left/sidebar/', product.id, product.category]">
+        <a [routerLink]="['/products/', product.id, product.category]">
+        <!-- <a [routerLink]="['/collection/left/sidebar/', product.id, product.category]"> -->
           <h6>{{ product?.title | titlecase }}</h6>
         </a>
       </ng-container>

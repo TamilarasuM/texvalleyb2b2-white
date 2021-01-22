@@ -1,6 +1,13 @@
+
+<app-header-one [sticky]="true"></app-header-one>
 <app-breadcrumb [title]="''" [breadcrumb]="productname"></app-breadcrumb>
 <!-- section start -->
-<section class="section-b-space" *ngIf="loader">
+<!-- <section>
+    <button (click)="refreshData()">Refresh</button>
+    <div class="col-grid-box">{{products | json }}}</div>
+</section> -->
+<!-- *ngIf="loader" -->
+<section class="section-b-space"  *ngIf="loader">
     <div class="collection-wrapper">
         <div class="container">
             <div class="row">
@@ -17,10 +24,8 @@
                             <!-- <app-categories></app-categories> -->
                         </div>
           
-                        <div *ngIf="filterCollection?.length > 0" class="collection-filter-block">
-                            <!-- brand filter start -->
-                            <!-- <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
-                            </app-brands> -->
+                        <div *ngIf="filterCollection.length > 0" class="collection-filter-block">
+                        
                             <ng-container  *ngFor="let dynamicFilter of filterCollection">
                                 <app-colors [products]="products" [key]="dynamicFilter" [colors]="colors" (colorsFilter)="updateFilter($event)">
                                 </app-colors>
@@ -39,19 +44,7 @@
                             <!-- <app-price [min]="minPrice" [max]="maxPrice" (priceFilter)="updateFilter($event)">
                             </app-price> -->
                         </div>
-                        <!-- silde-bar colleps block end here -->
-                        <!-- side-bar single product slider start -->
-                        <!-- cmt -->
-                        <!-- <app-product-box-vertical-slider [title]="'New Products'">
-                        </app-product-box-vertical-slider> -->
-                        <!-- side-bar single product slider end -->
-                        <!-- side-bar banner start here -->
-                        <!-- cmt -->
-                        <!-- <div class="collection-sidebar-banner">
-                            <a [routerLink]="['/collection/left/sidebar']">
-                                <img src="assets/images/collection-sidebar-banner.png" class="img-fluid" alt="banner">
-                            </a>
-                        </div> -->
+                   
                         <!-- side-bar banner end here -->
                     </div>
                 </div>
@@ -89,10 +82,12 @@
                                     <app-grid [products]="products" [paginate]="paginate" [layoutView]="layoutView" [productInfo]="productname" [sortBy]="sortBy" (setGrid)="updateGridLayout($event)" (setLayout)="updateLayoutView($event)" (sortedBy)="sortByFilter($event)">
                                     </app-grid>
                                     <div class="product-wrapper-grid" [ngClass]="layoutView">
+                                        <!-- -->
                                         <div class="row"  infiniteScroll [infiniteScrollDistance]="0.1" (scrolled)="onScroll()">
                                             <div class="col-grid-box" [ngClass]="grid" *ngFor="let product of products">
                                                 <div class="product-box">
-                                                    <app-product-box-one [product]="product" [currency]="productService?.Currency" [thumbnail]="false" [cartModal]="true" [loader]="true">
+                                                    <!-- {{product | json}} -->
+                                                    <app-product-box-one [product]="product" [currency]="productService?.Currency" [thumbnail]="false" [cartModal]="true" [loader]="true" [segmentView] ="false">
                                                     </app-product-box-one>
                                                 </div>
                                             </div>
@@ -115,6 +110,7 @@
         </div>
     </div>
 </section>
+<app-footer-one></app-footer-one>
 <!-- <div class="typography-box">
     <div class="typo-content loader-typo">
         <div class="pre-loader"></div>

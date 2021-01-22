@@ -22,6 +22,7 @@ export class CollectionNoSidebarComponent implements OnInit {
   public isSegmentView: boolean = true;
   public paginate: any = {}; // Pagination use only
   public sortBy: string; // Sorting Order
+  public mySubscription;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private viewScroller: ViewportScroller, public productService: ProductService, private navSrc: NavService, private routSrc: Resolver) {
@@ -44,7 +45,8 @@ export class CollectionNoSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.routSrc.dataList.subscribe((function (response) {
+   
+    this.mySubscription = this.routSrc.segmentDataList.subscribe((function (response) {
       this.segmentInfo = this.routSrc.segmenetName;
       this.products = response;
     }).bind(this)
@@ -70,13 +72,18 @@ export class CollectionNoSidebarComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    if(this.mySubscription)
+    this.mySubscription.unsubscribe();
+  }
+
   // SortBy Filter
   sortByFilter(value) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { sortBy: value ? value : null },
       queryParamsHandling: 'merge', // preserve the existing query params in the route
-      skipLocationChange: false  // do trigger navigation
+      // skipLocationChange: false  // do trigger navigation
     }).finally(() => {
       this.viewScroller.scrollToAnchor('products'); // Anchore Link
     });
@@ -88,7 +95,7 @@ export class CollectionNoSidebarComponent implements OnInit {
       relativeTo: this.route,
       queryParams: { page: page },
       queryParamsHandling: 'merge', // preserve the existing query params in the route
-      skipLocationChange: false  // do trigger navigation
+      // skipLocationChange: false  // do trigger navigation
     }).finally(() => {
       this.viewScroller.scrollToAnchor('products'); // Anchore Link
     });

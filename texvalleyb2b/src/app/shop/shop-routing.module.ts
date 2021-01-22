@@ -4,8 +4,6 @@ import { Resolver } from '../shared/services/resolver.service';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SuccessComponent } from './checkout/success/success.component';
-import { CollectionLeftSidebarComponent } from './collection/collection-left-sidebar/collection-left-sidebar.component';
-import { CollectionNoSidebarComponent } from './collection/collection-no-sidebar/collection-no-sidebar.component';
 import { CollectionRightSidebarComponent } from './collection/collection-right-sidebar/collection-right-sidebar.component';
 import { CompareComponent } from './compare/compare.component';
 import { BundleProductComponent } from './product/bundle-product/bundle-product.component';
@@ -31,20 +29,20 @@ const routes: Routes = [
     redirectTo: 'productdetails/:slug',
   },
 
-  {
-    path: 'products/:id/:name',
-    component: CollectionLeftSidebarComponent,
-    resolve: {
-      data: Resolver
-    }
-  },
-  {
-    path: 'products/:search',
-    component: CollectionLeftSidebarComponent,
-    resolve: {
-      data: Resolver
-    }
-  },
+  // {
+  //   path: 'products/:id/:name',
+  //   component: CollectionLeftSidebarComponent,
+  //   resolve: {
+  //     data: Resolver
+  //   }
+  // },
+  // {
+  //   path: 'products/:search',
+  //   component: CollectionLeftSidebarComponent,
+  //   resolve: {
+  //     data: Resolver
+  //   }
+  // },
 
   {
     path: 'productdetails/:slug',
@@ -124,13 +122,13 @@ const routes: Routes = [
     path: 'collection/right/sidebar',
     component: CollectionRightSidebarComponent
   },
-  {
-    path: 'segments/:id',
-    component: CollectionNoSidebarComponent,
-    resolve: {
-      data: Resolver
-    }
-  },
+  // {
+  //   path: 'segments/:id',
+  //   component: CollectionNoSidebarComponent,
+  //   resolve: {
+  //     data: Resolver
+  //   }
+  // },
   {
     path: 'cart',
     component: CartComponent

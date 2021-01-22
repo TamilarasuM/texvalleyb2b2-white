@@ -1,3 +1,4 @@
+<app-header-one [sticky]="true"></app-header-one>
 <app-breadcrumb [title]='segmentInfo' [breadcrumb]='segmentInfo'></app-breadcrumb>
 <!-- section start -->
 <section class="section-b-space">
@@ -8,7 +9,7 @@
                     <div class="page-main-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="collection-product-wrapper" id="products">
+                                <div class="collection-product-wrapper" id="segmentProducts">
                                     <app-grid 
                                         [products]="products"
                                         [paginate]="paginate"
@@ -24,6 +25,7 @@
                                                 [ngClass]="grid"
                                                 *ngFor="let product of products">
                                                 <div class="product-box">
+                                                    <!-- {{product | json}} -->
                                                     <app-product-box-one 
                                                         [product]="product" 
                                                         [currency]="productService?.Currency"
@@ -51,3 +53,4 @@
     </div>
 </section>
 <!-- section End -->
+<app-footer-one></app-footer-one>
