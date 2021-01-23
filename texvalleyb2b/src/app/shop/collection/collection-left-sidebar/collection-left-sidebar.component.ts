@@ -64,6 +64,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
       this.segmentID = this.route.snapshot.params["id"];
       this.productname = this.route.snapshot.params["name"];
+      this.productname = this.productname ? this.productname : this.route.snapshot.params["serch"];
+      // debugger
+      // this.productname = this.route.snapshot.params["name"];
 
 
       if (this.products.length > 0)

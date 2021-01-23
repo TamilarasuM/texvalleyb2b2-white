@@ -38,7 +38,8 @@ export class Resolver implements Resolve<Product> {
     this.selectedProductName = productname;
     debugger
     if (search) {
-      this.currentProduct.next(search);
+      // this.currentProduct.next(search);
+      this.selectedProductName = search;
       this.productService.getProductSearchList(search).toPromise().then(
         ((function (response) {
           var responseList = [];
@@ -50,6 +51,7 @@ export class Resolver implements Resolve<Product> {
               responseList[i]["images"][0].src = responseList[i].image_url;
             }
             this.product = responseList;
+            this.offsetCount = 0;
             this.dataList.next(responseList);
             // this.dataList.complete();
           }
@@ -100,15 +102,6 @@ export class Resolver implements Resolve<Product> {
         }
         ).bind(this)))
     }
-    // this.productService.getProductBySlug(route.params.slug).subscribe(product => {
-    //   
-    //   // if(!product) { // When product is empty redirect 404
-    //   //     this.router.navigateByUrl('/pages/404', {skipLocationChange: true});
-    //   // } else {
-    //   //     this.product = product
-    //   // }
-    // })
-    // return this.product;
   }
 
 }
