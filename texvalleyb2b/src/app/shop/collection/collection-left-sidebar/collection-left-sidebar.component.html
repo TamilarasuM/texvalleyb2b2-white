@@ -29,7 +29,7 @@
                             <ng-container  *ngFor="let dynamicFilter of filterCollection">
                                 <app-colors [products]="products" [key]="dynamicFilter" [colors]="colors" (colorsFilter)="updateFilter($event)">
                                 </app-colors>
-                            </ng-container>
+                            </ng-container> 
                             
                             <!-- <ng-container  *ngFor="let dynamicFilter of filterCollection">
                                 <app-colors [products]="dynamicFilter" [currentproducts]="products" [key]="dynamicFilter.attribute" [colors]="colors" (colorsFilter)="updateFilter($event)">
@@ -41,8 +41,11 @@
                             <!-- <app-size [products]="products" [size]="size" (sizeFilter)="updateFilter($event)">
                             </app-size> -->
                             <!-- price filter start here -->
-                            <!-- <app-price [min]="minPrice" [max]="maxPrice" (priceFilter)="updateFilter($event)">
-                            </app-price> -->
+                            <ng-container *ngIf="productService.isLogin && productService.isKYCVerified">
+                                <app-price [min]="minPrice" [max]="maxPrice" [floorValue]="floorPrice" [ceilValue]="ceilPrice" (priceFilter)="updateFilter($event)">
+                                </app-price>
+                            </ng-container>
+                           
                         </div>
                    
                         <!-- side-bar banner end here -->

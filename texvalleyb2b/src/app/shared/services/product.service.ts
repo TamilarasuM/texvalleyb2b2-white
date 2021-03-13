@@ -19,6 +19,7 @@ export class ProductService {
   public Currency = { name: 'Dollar', currency: 'USD', price: 1 } // Default Currency
   public OpenCart: boolean = false;
   public isLogin: boolean = false;
+  public isKYCVerified: boolean = false;
   public Products;
   public cartDetails = new BehaviorSubject([]);
   public urlCollection = environment.applicationUrl;
@@ -35,6 +36,10 @@ export class ProductService {
   constructor(private http: HttpClient,
     private toastrService: ToastrService) {
     this.isLogin = localStorage.getItem("LoginDetails") == null ? false : true;
+    if(this.isLogin) {
+      var userDetails = JSON.parse(localStorage.getItem("LoginDetails"));
+      this.isKYCVerified = userDetails["verified"] == 0 ? false : true;
+    }
   }
   /*
     ---------------------------------------------
@@ -283,7 +288,6 @@ export class ProductService {
   public confirmOrders(shippingAdress:any) {
     var params = JSON.parse(localStorage.getItem("LoginDetails"))
     var headers = Object.assign(params, {shipping_address: JSON.stringify(shippingAdress)});
-    debugger
     // var confirmOrderUrl = "https://stage.texvalleyb2b.in/api_web/confirm_order.php";
     return this.http.post<any>(environment.applicationUrl.confirmOrderUrl, JSON.stringify(headers))
   }
@@ -319,7 +323,7 @@ export class ProductService {
   */
   // Get Product Filter
   public filterProducts(filter: any): Observable<Product[]> {
-    debugger
+  
     return this.products.pipe(map(product =>
       product.filter((item: Product) => {
         if (!filter.length) return true
@@ -338,7 +342,6 @@ export class ProductService {
     return prodCollection.filter((item: Product) => {
       if (!filterTag.length)
         return true;
-// debugger
         // for(var j=0; j < filterTag.length; j++){
         //   var filterParams = filterTag[j].split("-");
         //   if (filterParams.length>0) { 
@@ -350,11 +353,19 @@ export class ProductService {
         // }
          var filterCnt =0;
         for(var i=0; i < filterTag.length; i++){
-          for(var k=0; k < item["attribute"].length; k++){
-            var filterParams = filterTag[i].split("-");
-            if (filterParams.length>0) { 
-              if(item["attribute"][k]["a_name"] == filterParams[0] && item["attribute"][k]["a_value"] == filterParams[1]) 
-                 filterCnt ++;
+          var filterParams = filterTag[i].split("-");
+          if(filterParams.length>0 && filterParams[0].indexOf("Price ")>-1){
+            var minValue = filterParams[0].replace("Price ","");
+            var maxValue = filterParams[1];
+            if((item["price"] >= minValue) && (item["price"] <= maxValue))
+              filterCnt ++;
+          }
+          else {
+            for(var k=0; k < item["attribute"].length; k++){
+              if (filterParams.length>0) { 
+                if(item["attribute"][k]["a_name"] == filterParams[0] && item["attribute"][k]["a_value"] == filterParams[1]) 
+                  filterCnt ++;
+              }
             }
           }
         }

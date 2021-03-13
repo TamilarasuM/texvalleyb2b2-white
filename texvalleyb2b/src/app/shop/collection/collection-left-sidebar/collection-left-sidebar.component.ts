@@ -27,7 +27,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public colors: any[] = [];
   public size: any[] = [];
   public minPrice: number = 0;
-  public maxPrice: number = 1200;
+  public maxPrice: number = 5000;
+  public floorPrice = 0;
+  public ceilPrice = 0;
+
   public tags: any[] = [];
   public category: string;
   public pageNo: number = 1;
@@ -169,8 +172,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
           this.currentProducts = res;
           this.resolverSVC.offsetCount = 30;
         }
-        var filterDatas = this.productService.filterProductCollection(this.tags, this.currentProducts);
-        this.products = filterDatas;//Object.assign([],filterDatas);
+
+        var filterDatas = this.productService.filterProductCollection(this.tags, this.currentProducts, this.minPrice);
+        this.products = filterDatas;//Object.assign([],filterDatas);\
+        this.updateMinMax(this.products);
         if (res[0].attribute)
           this.filterCollection = res[0].attribute.map((args) => args.a_name);
         this.loader = true;
@@ -232,11 +237,25 @@ export class CollectionLeftSidebarComponent implements OnInit {
     return this.Products; // = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
   }
 
+  public updateMinMax(products: any[]){
+    debugger
+    var minValue =0, maxValue =0;
+      for (var i = 0; i < products.length; i++) { 
+        if(minValue ==0 || minValue > products[i].price )
+            minValue = products[i].price;
+        if(maxValue ==0 || maxValue < products[i].price )
+            maxValue = products[i].price;
+    }
+    
+    this.floorPrice = minValue;
+    this.ceilPrice = maxValue;
+  }
+
   // Append filter value to Url
   updateFilter(tags: any) {
     debugger
     this.isFilter = true;
-    var filterItems = tags.color ? tags.color.split(",") : [];
+    var filterItems = tags.color ? tags.color.split(",") : tags.size ? tags.size.split(",") :  [];
     tags.page = null; // Reset Pagination
     this.router.navigate([], {
       relativeTo: this.route,
@@ -284,7 +303,6 @@ export class CollectionLeftSidebarComponent implements OnInit {
       color: this.colors.length ? this.colors.join(",") : null,
       size: this.size.length ? this.size.join(",") : null
     }
-
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: params,

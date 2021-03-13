@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, Input, EventEmitter, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { Options } from 'ng5-slider';
 
 @Component({
@@ -15,13 +15,15 @@ export class PriceComponent implements OnInit {
   // define min, max and range
   @Input() min: number;
   @Input() max: number;
+  @Input() floorValue: number;
+  @Input() ceilValue: number;
 
   public collapse: boolean = true;
   public isBrowser: boolean = false;
 
   options: Options = {
     floor: 0,
-    ceil: 1000
+    ceil: 5000
   };
   
   price = { 
@@ -35,12 +37,15 @@ export class PriceComponent implements OnInit {
     }
   }
   
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.options.ceil =  5000 ; //this.ceilValue;
+    this.options.floor = 0; //this.floorValue;
+   }
 
   // Range Changed
   appliedFilter(event: any) {
-    this.price = { minPrice: event.value, maxPrice: event.highValue };
-    this.priceFilter.emit(this.price);
+    // this.price = "price "+event.value +"-" +event.highValue"; //{ minPrice: event.value, maxPrice: event.highValue };
+    this.priceFilter.emit({"size": "Price " + event.value +"-" +event.highValue});
   }
 
 }
