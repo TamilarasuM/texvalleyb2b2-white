@@ -1,6 +1,9 @@
 .productInfo img{
     height: 215px;
-    width: 280px;
+    // width: 280px;
+    width: auto !important;
+    display: initial !important;
+
 }
 
 .count-type {

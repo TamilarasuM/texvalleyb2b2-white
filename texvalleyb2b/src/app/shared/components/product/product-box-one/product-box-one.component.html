@@ -34,7 +34,7 @@
         <bar-rating  style="visibility: hidden;" [rate]="5" [readOnly]="true"></bar-rating>
         <a [routerLink]="['/products/', product.id, product.category]">
         <!-- <a [routerLink]="['/collection/left/sidebar/', product.id, product.category]"> -->
-          <h6>{{ product?.title | titlecase }}</h6>
+          <h6 style="text-align: center;">{{ product?.title | titlecase }}</h6>
         </a>
       </ng-container>
       <ng-container *ngIf='segmentView==false'> 
